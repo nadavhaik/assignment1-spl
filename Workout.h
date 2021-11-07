@@ -20,7 +20,7 @@ public:
         return price;
     }
     WorkoutType getType() const{
-        return type
+        return type;
     }
 private:
 	const int id;
