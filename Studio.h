@@ -31,20 +31,22 @@ Studio::Studio() {
 
 }
 
-Studio::Studio(const std::string &configFilePath) {
-    this->open = false;
-    this->trainers = {};
-    this->workout_options = {};
-    this->actionsLog = {};
+Studio::Studio(const std::string &configFilePath): open(false) {
+    //this->open = false;
+//    this->trainers;
+//    this->workout_options;
+//    this->actionsLog;
 
     int number_of_trainers = -1; // default value
     int next_workout_id = 0;
-    std::fstream file;
-    file.open(configFilePath, std::ios::out);
+    std::ifstream file;
+    file.open(configFilePath);
+    //file.open(configFilePath, std::ios::out);
     if(!file.is_open()) {
         throw std::invalid_argument("file couldn't be opened!");
     }
     std::string line;
+    getline(file, line);
     while(getline(file, line)){
         if(line.find_first_of('#') != 0 && !line.empty()) {
             if(number_of_trainers == -1)
@@ -64,7 +66,7 @@ Studio::Studio(const std::string &configFilePath) {
                 std::string workout_name(word);
                 getline(ss, word, ',');
                 std::string workout_type(word.substr(1));
-                getline(ss, word, '\n');
+                getline(ss, word);
                 word = word.substr(1);
                 int workout_price = std::stoi(word);
 
@@ -76,7 +78,7 @@ Studio::Studio(const std::string &configFilePath) {
                 else // "Cardio"
                     t = WorkoutType::CARDIO;
 
-                Workout w = Workout(next_workout_id, workout_name, workout_price, t);
+                Workout w = Workout(next_workout_id, workout_name, workout_price, t, CARDIO);
                 next_workout_id++;
                 workout_options.push_back(w);
             }
