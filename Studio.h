@@ -78,7 +78,7 @@ Studio::Studio(const std::string &configFilePath): open(false) {
                 else // "Cardio"
                     t = WorkoutType::CARDIO;
 
-                Workout w = Workout(next_workout_id, workout_name, workout_price, t, CARDIO);
+                Workout w = Workout(next_workout_id, workout_name, workout_price, t);
                 next_workout_id++;
                 workout_options.push_back(w);
             }
