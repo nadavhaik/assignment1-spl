@@ -16,7 +16,8 @@ private:
     const std::string name;
     const int id;
 };
-
+Customer::Customer(std::string c_name, int c_id) :
+    id(c_id), name(c_name) {}
 
 class SweatyCustomer : public Customer {
 public:
