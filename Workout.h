@@ -17,7 +17,7 @@ public:
         return name;
     }
     int getPrice() const{
-        return price
+        return price;
     }
     WorkoutType getType() const{
         return type;
