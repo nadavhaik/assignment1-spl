@@ -18,8 +18,15 @@ public:
     void addCustomer(Customer* customer){
         customersList.push_back(customer);
     }
-    void removeCustomer(int id){}
-
+    void removeCustomer(int id){
+        /*
+        for(std::size_t i = 0; i<customersList.size();i++)
+        Customer c = customersList[i];
+        if(c.getId() == id){
+            c.
+        }
+*/
+    }
     Customer* getCustomer(int id);
     std::vector<Customer*>& getCustomers();
     std::vector<OrderPair>& getOrders();
