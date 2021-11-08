@@ -1,4 +1,5 @@
 #include "Studio.h"
+#include "Studio.cpp"
 #include <iostream>
 
 using namespace std;
