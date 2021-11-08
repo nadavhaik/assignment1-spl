@@ -15,13 +15,14 @@ void Trainer::addCustomer(Customer* customer){
     customersList.push_back(customer);
 }
 void Trainer::removeCustomer(int id){
-    /*
-    for(std::size_t i = 0; i<customersList.size();i++)
-    Customer c = customersList[i];
-    if(c.getId() == id){
-        c.
+    for(std::size_t i = 0; i<customersList.size();i++) {
+        Customer *c = customersList[i];
+        if(c->getId() == id) {
+            // only deleting *FROM THE LIST*
+            customersList.erase(customersList.begin() + i);
+            break;
+        }
     }
-*/
 }
 
 int Trainer::getCapacity() const {
