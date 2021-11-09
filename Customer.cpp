@@ -43,8 +43,21 @@ HeavyMuscleCustomer::HeavyMuscleCustomer(std::string name, int id) : Customer(na
 
 }
 
+bool compare_for_heavy_muscle (int i,int j) { return (i<j); }
+
+
 std::vector<int> HeavyMuscleCustomer::order(const std::vector<Workout> &workout_options) {
-    return std::vector<int>();
+    std::vector<Workout> anaerobic_options;
+    std::vector<int> options;
+
+    for(const Workout& w : workout_options) {
+        if(w.getType() == WorkoutType::ANAEROBIC)
+            anaerobic_options.push_back(w);
+    }
+    anaerobic_options.
+    for(size_t i=0; i<anaerobic_options.size();i++) {
+        for()
+    }
 }
 
 FullBodyCustomer::FullBodyCustomer(std::string name, int id) : Customer(name, id) {
