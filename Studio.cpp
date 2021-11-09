@@ -2,22 +2,21 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include "Studio.h"
+
+extern Studio* backup;
 
 Studio::Studio() {
 
 }
 
 Studio::Studio(const std::string &configFilePath): open(false) {
-    //this->open = false;
-//    this->trainers;
-//    this->workout_options;
-//    this->actionsLog;
+    next_customer_id = 0;
 
     int number_of_trainers = -1; // default value
     int next_workout_id = 0;
     std::ifstream file;
     file.open(configFilePath);
-    //file.open(configFilePath, std::ios::out);
     if(!file.is_open()) {
         throw std::invalid_argument("file couldn't be opened!");
     }
@@ -82,7 +81,73 @@ void Studio::start() {
     this->open = true;
     std::cout << "Studio is now open!" << std::endl;
     std::string input;
+    mainLoop();
+}
+
+int Studio::allocateNewCustomerId() {
+    next_customer_id++;
+    return next_customer_id-1;
+}
+
+void Studio::mainLoop() {
+    std::string input;
     while(true) {
-        //std::cin.getline(input);
+        std::cin >> input;
+        if(input.rfind("open",0) == 0)
+            openTrainer(input);
+        else if(input == "closeall") {
+            closeAll();
+            break;
+        }
+
+
     }
+}
+
+void Studio::closeAll() {
+
+}
+
+void Studio::openTrainer(std::string command) {
+    command = command.substr(5); // without "open"
+    std::stringstream ss(command);
+    std::string substr;
+    Trainer *t = nullptr;
+    std::vector<std::string> names;
+    std::vector<std::string> codes;
+    while(ss.good()) {
+        getline(ss, substr, ' ');
+        if(t == nullptr) {
+            int trainer_id = std::stoi(substr);
+            t = getTrainerById(trainer_id);
+        }
+        else {
+            std::string customer_name;
+            std::string strategy;
+            getline(ss, customer_name, ',');
+            getline(ss, strategy, ' ');
+            names.push_back(customer_name);
+            codes.push_back(strategy);
+        }
+        for()
+    }
+
+
+    int customer_id = allocateNewCustomerId();
+    if(strategy == "swt")
+        c = new SweatyCustomer(customer_name, customer_id);
+    else if (strategy == "chp")
+        c = new CheapCustomer(customer_name, customer_id);
+    else if (strategy == "mcl")
+        c = new HeavyMuscleCustomer(customer_name, customer_id);
+    else if (strategy == "fbd")
+        c = new FullBodyCustomer(customer_name, customer_id);
+    else
+        throw std::invalid_argument("Illegal code: " + strategy);
+}
+
+Trainer *Studio::getTrainerById(int id) {
+    if(trainers.size() <= id)
+        throw std::invalid_argument("no such trainer!");
+    return trainers[id];
 }

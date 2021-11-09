@@ -1,3 +1,7 @@
+#include "Customer.h"
+#include "Customer.cpp"
+
+
 Trainer::Trainer(int t_capacity): capacity(t_capacity) {}
 
 void Trainer::openTrainer(){
