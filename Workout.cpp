@@ -23,5 +23,5 @@ Workout &Workout::operator=(Workout &&other) noexcept {
 }
 
 Workout::Workout(Workout const &other)
-        : id(other.getId()), price(other.getPrice()), type(other.getType()) {
+        : id(other.id), price(other.price), type(other.type) {
 }
