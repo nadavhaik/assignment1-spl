@@ -129,10 +129,10 @@ void Studio::openTrainer(std::string command) {
             names.push_back(customer_name);
             codes.push_back(strategy);
         }
-        for()
     }
 
-
+    Customer *c;
+    std::string strategy, customer_name;
     int customer_id = allocateNewCustomerId();
     if(strategy == "swt")
         c = new SweatyCustomer(customer_name, customer_id);
