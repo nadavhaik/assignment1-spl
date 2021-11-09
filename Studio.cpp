@@ -21,7 +21,6 @@ Studio::Studio(const std::string &configFilePath): open(false) {
         throw std::invalid_argument("file couldn't be opened!");
     }
     std::string line;
-    getline(file, line);
     while(getline(file, line)){
         if(line.find_first_of('#') != 0 && !line.empty()) {
             if(number_of_trainers == -1)
