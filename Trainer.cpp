@@ -32,3 +32,27 @@ void Trainer::removeCustomer(int id){
 int Trainer::getCapacity() const {
     return capacity;
 }
+
+//should we throw an invalid argument error ? - not mentioned
+Customer *Trainer::getCustomer(int id) {
+    Customer* required_cus;
+    bool found = false;
+    for (Customer* c : customersList) {
+        if(c->getId() == id) {
+            required_cus = c;
+            found = true;
+        }
+    }
+    if(!found)
+        throw std::invalid_argument("no such customer!");
+    return required_cus;
+}
+
+//shouldn't we check if the workout was completed ? - not mentioned
+int Trainer::getSalary() {
+    int salary = 0;
+    for (OrderPair p : orderList){
+        salary += p.second.getPrice();
+    }
+    return salary;
+}

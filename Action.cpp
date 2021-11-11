@@ -18,7 +18,7 @@ void BaseAction::complete(){
 
 void BaseAction::error(std::string errorMsg){
     status = ERROR;
-    cout<<errorMsg;
+    cout << errorMsg << std::endl;
 }
 
 
@@ -28,3 +28,6 @@ string BaseAction::getErrorMsg() const {
 
 OpenTrainer::OpenTrainer(int id, std::vector<Customer *> &customersList): trainerId(id), customers(customersList){}
 
+void OpenTrainer::act(Studio &studio) {
+
+}
