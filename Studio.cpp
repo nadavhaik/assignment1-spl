@@ -6,9 +6,7 @@
 
 extern Studio* backup;
 
-Studio::Studio() {
-
-}
+Studio::Studio() {}
 
 Studio::Studio(const std::string &configFilePath): open(false) {
     next_customer_id = 0;
