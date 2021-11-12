@@ -93,17 +93,17 @@ std::vector<int> FullBodyCustomer::order(const std::vector<Workout> &workout_opt
         switch (w.getType()) {
             case WorkoutType::CARDIO:
                 if ((cheapest_cardio == nullptr) ||
-                    (w.getPrice() <= cheapest_cardio->getPrice() && w.getId() < cheapest_cardio->getId()))
+                        (w.getPrice() <= cheapest_cardio->getPrice() && w.getId() < cheapest_cardio->getId()))
                     cheapest_cardio = new Workout(w);
                 break;
             case WorkoutType::MIXED:
                 if ((most_expensive_mixed == nullptr) ||
-                    (w.getPrice() >= most_expensive_mixed->getPrice() && w.getId() < most_expensive_mixed->getId()))
+                        (w.getPrice() >= most_expensive_mixed->getPrice() && w.getId() < most_expensive_mixed->getId()))
                     most_expensive_mixed = new Workout(w);
                 break;
             case WorkoutType::ANAEROBIC:
                 if ((cheapest_anaerobic == nullptr) ||
-                    (w.getPrice() <= cheapest_anaerobic->getPrice() && w.getId() < cheapest_anaerobic->getId()))
+                        (w.getPrice() <= cheapest_anaerobic->getPrice() && w.getId() < cheapest_anaerobic->getId()))
                     cheapest_anaerobic = new Workout(w);
                 break;
         }
