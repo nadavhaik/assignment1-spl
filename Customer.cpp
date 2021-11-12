@@ -98,7 +98,7 @@ std::vector<int> FullBodyCustomer::order(const std::vector<Workout> &workout_opt
                 break;
             case WorkoutType::MIXED:
                 if ((most_expensive_mixed == nullptr) || w.getPrice() > most_expensive_mixed->getPrice() ||
-                    (w.getPrice() == most_expensive_mixed->getPrice() && w.getId() < most_expensive_mixed->getId()))
+                        (w.getPrice() == most_expensive_mixed->getPrice() && w.getId() < most_expensive_mixed->getId()))
                     most_expensive_mixed = new Workout(w);
                 break;
             case WorkoutType::ANAEROBIC:
