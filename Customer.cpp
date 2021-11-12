@@ -37,8 +37,8 @@ CheapCustomer::CheapCustomer(std::string name, int id) : Customer(name, id) {
 std::vector<int> CheapCustomer::order(const std::vector<Workout> &workout_options) {
     Workout *cheapest = nullptr;
     for(const Workout& w: workout_options) {
-        if(cheapest == nullptr ||
-                (w.getPrice() <= cheapest->getPrice() && w.getId() < cheapest->getId()))
+        if(cheapest == nullptr || w.getPrice() < cheapest->getPrice() ||
+                (w.getPrice() == cheapest->getPrice() && w.getId() < cheapest->getId()))
             cheapest = new Workout(w);
     }
 
@@ -92,18 +92,18 @@ std::vector<int> FullBodyCustomer::order(const std::vector<Workout> &workout_opt
     for(const Workout &w : workout_options) {
         switch (w.getType()) {
             case WorkoutType::CARDIO:
-                if ((cheapest_cardio == nullptr) ||
-                        (w.getPrice() <= cheapest_cardio->getPrice() && w.getId() < cheapest_cardio->getId()))
+                if (cheapest_cardio == nullptr || w.getPrice() < cheapest_cardio->getPrice() ||
+                        (w.getPrice() == cheapest_cardio->getPrice() && w.getId() < cheapest_cardio->getId()))
                     cheapest_cardio = new Workout(w);
                 break;
             case WorkoutType::MIXED:
-                if ((most_expensive_mixed == nullptr) ||
-                        (w.getPrice() >= most_expensive_mixed->getPrice() && w.getId() < most_expensive_mixed->getId()))
+                if ((most_expensive_mixed == nullptr) || w.getPrice() > most_expensive_mixed->getPrice() ||
+                    (w.getPrice() == most_expensive_mixed->getPrice() && w.getId() < most_expensive_mixed->getId()))
                     most_expensive_mixed = new Workout(w);
                 break;
             case WorkoutType::ANAEROBIC:
-                if ((cheapest_anaerobic == nullptr) ||
-                        (w.getPrice() <= cheapest_anaerobic->getPrice() && w.getId() < cheapest_anaerobic->getId()))
+                if ((cheapest_anaerobic == nullptr) || w.getPrice() < cheapest_anaerobic->getPrice() ||
+                        (w.getPrice() == cheapest_anaerobic->getPrice() && w.getId() < cheapest_anaerobic->getId()))
                     cheapest_anaerobic = new Workout(w);
                 break;
         }
