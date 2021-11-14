@@ -56,7 +56,7 @@ HeavyMuscleCustomer::HeavyMuscleCustomer(std::string name, int id) : Customer(na
 
 }
 
-bool compare_workouts_by_price_desc_and_id_asc (Workout &w1, Workout &w2) {
+bool compare_workouts_by_price_desc_and_id_asc(Workout &w1, Workout &w2) {
     if(w1.getPrice() == w2.getPrice())
         return w1.getId() < w2.getId();
     return w2.getPrice() < w1.getPrice();
