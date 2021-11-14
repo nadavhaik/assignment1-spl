@@ -4,13 +4,6 @@
 
 Trainer::Trainer(int t_capacity): capacity(t_capacity) {}
 
-void Trainer::openTrainer(){
-    open = true;
-}
-void Trainer::closeTrainer(){
-    open = false;
-}
-
 bool Trainer::isOpen(){
     return open;
 }

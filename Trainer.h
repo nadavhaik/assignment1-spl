@@ -18,8 +18,6 @@ public:
     std::vector<Customer*>& getCustomers();
     std::vector<OrderPair>& getOrders();
     void order(const int customer_id, const std::vector<int> workout_ids, const std::vector<Workout>& workout_options);
-    void openTrainer();
-    void closeTrainer();
     int getSalary();
     bool isOpen();
 private:
