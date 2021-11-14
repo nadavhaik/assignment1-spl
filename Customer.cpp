@@ -38,14 +38,18 @@ std::vector<int> CheapCustomer::order(const std::vector<Workout> &workout_option
     Workout *cheapest = nullptr;
     for(const Workout& w: workout_options) {
         if(cheapest == nullptr || w.getPrice() < cheapest->getPrice() ||
-                (w.getPrice() == cheapest->getPrice() && w.getId() < cheapest->getId()))
+                (w.getPrice() == cheapest->getPrice() && w.getId() < cheapest->getId())) {
+            delete cheapest;
             cheapest = new Workout(w);
+        }
     }
 
     if(cheapest == nullptr)
         return {};
 
-    return {cheapest->getId()};
+    int id = cheapest->getId();
+    delete cheapest;
+    return {id};
 }
 
 std::string CheapCustomer::toString() const {
@@ -71,7 +75,7 @@ std::vector<int> HeavyMuscleCustomer::order(const std::vector<Workout> &workout_
             options.push_back(w);
     }
     std::sort(options.begin(), options.end(), compare_workouts_by_price_desc_and_id_asc);
-    for(const Workout& w : workout_options)
+    for(const Workout& w : options)
         options_ids.push_back(w.getId());
 
     return options_ids;
@@ -93,18 +97,24 @@ std::vector<int> FullBodyCustomer::order(const std::vector<Workout> &workout_opt
         switch (w.getType()) {
             case WorkoutType::CARDIO:
                 if (cheapest_cardio == nullptr || w.getPrice() < cheapest_cardio->getPrice() ||
-                        (w.getPrice() == cheapest_cardio->getPrice() && w.getId() < cheapest_cardio->getId()))
+                        (w.getPrice() == cheapest_cardio->getPrice() && w.getId() < cheapest_cardio->getId())) {
+                    delete cheapest_cardio;
                     cheapest_cardio = new Workout(w);
+                }
                 break;
             case WorkoutType::MIXED:
                 if (most_expensive_mixed == nullptr || w.getPrice() > most_expensive_mixed->getPrice() ||
-                        (w.getPrice() == most_expensive_mixed->getPrice() && w.getId() < most_expensive_mixed->getId()))
+                        (w.getPrice() == most_expensive_mixed->getPrice() && w.getId() < most_expensive_mixed->getId())) {
+                    delete most_expensive_mixed;
                     most_expensive_mixed = new Workout(w);
+                }
                 break;
             case WorkoutType::ANAEROBIC:
                 if (cheapest_anaerobic == nullptr || w.getPrice() < cheapest_anaerobic->getPrice() ||
-                        (w.getPrice() == cheapest_anaerobic->getPrice() && w.getId() < cheapest_anaerobic->getId()))
+                        (w.getPrice() == cheapest_anaerobic->getPrice() && w.getId() < cheapest_anaerobic->getId())) {
+                    delete cheapest_anaerobic;
                     cheapest_anaerobic = new Workout(w);
+                }
                 break;
         }
     }
@@ -116,6 +126,10 @@ std::vector<int> FullBodyCustomer::order(const std::vector<Workout> &workout_opt
         options.push_back(most_expensive_mixed->getId());
     if(cheapest_anaerobic != nullptr)
         options.push_back(cheapest_anaerobic->getId());
+
+    delete cheapest_cardio;
+    delete most_expensive_mixed;
+    delete cheapest_anaerobic;
 
     return options;
 }

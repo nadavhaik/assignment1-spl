@@ -1,6 +1,8 @@
 #include "Action.h"
 #include <string>
 #include <iostream>
+extern Studio* backup;
+
 
 using namespace std;
 
@@ -29,5 +31,19 @@ string BaseAction::getErrorMsg() const {
 OpenTrainer::OpenTrainer(int id, std::vector<Customer *> &customersList): trainerId(id), customers(customersList){}
 
 void OpenTrainer::act(Studio &studio) {
+
+}
+
+Order::Order(int trainer_id) {
+    id = trainer_id;
+}
+
+void Order::act(Studio &studio) {
+
+}
+
+MoveCustomer::MoveCustomer(int src, int dst, int customerId) {
+    srcTrainer = sr
+            c;
 
 }

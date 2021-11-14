@@ -9,6 +9,11 @@ enum ActionStatus{
     COMPLETED, ERROR
 };
 
+enum ActionType{
+    OPEN_TRAINER, ORDER, MOVE_CUSTOMER, CLOSE, CLOSE_ALL, PRINT_WORKOUT_OPTIONS,
+    PRINT_TRAINER_STATUS, PRINT_ACTIONS_LOG, BACKUP_STUDIO, RESTORE_STUDIO
+};
+
 //Forward declaration
 class Studio;
 

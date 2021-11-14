@@ -25,11 +25,12 @@ public:
 private:
     bool open;
     int next_customer_id;
-    Trainer *getTrainerById(int id);
+    int customer_id_backup;
     int allocateNewCustomerId();
-    void openTrainer(std::string command);
+    void backupCustomerId();
+    void restoreCustomerIdFromBackup();
     void mainLoop();
-    void closeAll();
+    void handleInput();
     std::vector<Trainer*> trainers;
     std::vector<Workout> workout_options;
     std::vector<BaseAction*> actionsLog;
