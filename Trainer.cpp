@@ -49,3 +49,7 @@ int Trainer::getSalary() {
     }
     return salary;
 }
+
+std::vector<Customer *> &Trainer::getCustomers() {
+    return customersList;
+}
