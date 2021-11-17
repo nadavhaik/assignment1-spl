@@ -1,3 +1,4 @@
+#include <unordered_map>
 #include "Customer.cpp"
 #include "MoveCustomer.cpp"
 #include "CloseAll.cpp"
@@ -6,6 +7,8 @@
 #include "PrintActionsLog.cpp"
 #include "BackupStudio.cpp"
 #include "RestoreStudio.cpp"
+using namespace std;
+
 Studio::Studio() {}
 
 Studio::Studio(const std::string &configFilePath) {
@@ -15,34 +18,34 @@ Studio::Studio(const std::string &configFilePath) {
 
     int number_of_trainers = -1; // default value
     int next_workout_id = 0;
-    std::ifstream file;
+    ifstream file;
     file.open(configFilePath);
     if(!file.is_open()) {
         throw std::invalid_argument("file couldn't be opened!");
     }
-    std::string line;
+    string line;
     while(getline(file, line)){
         if(line.find_first_of('#') != 0 && !line.empty()) {
             if(number_of_trainers == -1)
-                number_of_trainers = std::stoi(line);
+                number_of_trainers = stoi(line);
             else if(this->trainers.empty()) {
-                std::stringstream ss(line);
-                std::string substr;
+                stringstream ss(line);
+                string substr;
                 while(ss.good()) {
                     getline(ss, substr, ',');
                     int capacity = std::stoi(substr);
                     this->trainers.push_back(new Trainer(capacity));
                 }
             } else {
-                std::stringstream ss(line);
-                std::string word;
+                stringstream ss(line);
+                string word;
                 getline(ss, word, ',');
-                std::string workout_name(word);
+                string workout_name(word);
                 getline(ss, word, ',');
-                std::string workout_type(word.substr(1));
+                string workout_type(word.substr(1));
                 getline(ss, word);
                 word = word.substr(1);
-                int workout_price = std::stoi(word);
+                int workout_price = stoi(word);
 
                 WorkoutType t;
                 if(workout_type == "Anaerobic")
@@ -68,18 +71,18 @@ Trainer *Studio::getTrainer(int tid) {
     return this->trainers[tid];
 }
 
-const std::vector<BaseAction *> &Studio::getActionsLog() const {
+const vector<BaseAction *> &Studio::getActionsLog() const {
     return actionsLog;
 }
 
-std::vector<Workout> &Studio::getWorkoutOptions() {
+vector<Workout> &Studio::getWorkoutOptions() {
     return workout_options;
 }
 
 void Studio::start() {
     this->open = true;
-    std::cout << "Studio is now open!" << std::endl;
-    std::string input;
+    cout << "Studio is now open!" << std::endl;
+    string input;
     mainLoop();
 }
 
@@ -89,59 +92,45 @@ int Studio::allocateNewCustomerId() {
 }
 
 void Studio::handleInput() {
-    std::string input_command;
+    string input_command;
     BaseAction *action;
-    ActionType actionType;
-    std::string substr;
+    string substr;                                              //  Prefix:              Action Enum:
+    const unordered_map<string, ActionType> &action_prefixes = {{"open",            OPEN_TRAINER},
+                                                                {"order",           ORDER},
+                                                                {"move",            MOVE_CUSTOMER},
+                                                                {"close",           CLOSE},
+                                                                {"closeall",        CLOSE_ALL},
+                                                                {"workout_options", PRINT_WORKOUT_OPTIONS},
+                                                                {"status",          PRINT_TRAINER_STATUS},
+                                                                {"log",             PRINT_ACTIONS_LOG},
+                                                                {"backup",          BACKUP_STUDIO},
+                                                                {"restore",         RESTORE_STUDIO}};
 
     getline(cin, input_command);
-    std::stringstream ss(input_command);
-
-
+    stringstream ss(input_command);
     if(input_command.rfind(' ') == -1)
         substr = input_command;
     else
         getline(ss, substr, ' ');
 
-    if (substr == "open")
-        actionType = ActionType::OPEN_TRAINER;
-    else if (substr == "order")
-        actionType = ActionType::ORDER;
-    else if (substr == "move")
-        actionType = ActionType::MOVE_CUSTOMER;
-    else if (substr == "close")
-        actionType = ActionType::CLOSE;
-    else if (substr == "closeall")
-        actionType = ActionType::CLOSE_ALL;
-    else if (substr == "workout_options")
-        actionType = ActionType::PRINT_WORKOUT_OPTIONS;
-    else if (substr == "status")
-        actionType = ActionType::PRINT_TRAINER_STATUS;
-    else if (substr == "log")
-        actionType = ActionType::PRINT_ACTIONS_LOG;
-    else if (substr == "backup")
-        actionType = ActionType::BACKUP_STUDIO;
-    else if (substr == "restore")
-        actionType = ActionType::RESTORE_STUDIO;
-
-
+    ActionType actionType = action_prefixes.at(substr);
     // variables for switch-case:
     int trainer_id;
     int source_id;
     int dest_id;
     int customer_id;
-    std::vector<Customer *> customerList;
+    vector<Customer *> customerList;
 
     switch(actionType) {
         case OPEN_TRAINER:
             backupCustomerId(); // for case of failure - we'll want to roll back the ids allocation
             getline(ss, substr, ' ');
-            trainer_id = std::stoi(substr);
+            trainer_id = stoi(substr);
             while (ss.good()) {
                 getline(ss, substr, ' ');
                 Customer *c;
-                std::string customer_name;
-                std::string strategy;
+                string customer_name;
+                string strategy;
                 getline(ss, customer_name, ',');
                 getline(ss, strategy, ' ');
                 if (strategy == "swt")
@@ -159,23 +148,23 @@ void Studio::handleInput() {
             break;
         case ORDER:
             getline(ss, substr, ' ');
-            trainer_id = std::stoi(substr);
+            trainer_id = stoi(substr);
 
             action = new Order(trainer_id);
             break;
         case MOVE_CUSTOMER:
             getline(ss, substr, ' ');
-            source_id = std::stoi(substr);
+            source_id = stoi(substr);
             getline(ss, substr, ' ');
-            dest_id = std::stoi(substr);
+            dest_id = stoi(substr);
             getline(ss, substr, ' ');
-            customer_id = std::stoi(substr);
+            customer_id = stoi(substr);
 
             action = new MoveCustomer(source_id, dest_id, customer_id);
             break;
         case CLOSE:
             getline(ss, substr, ' ');
-            trainer_id = std::stoi(substr);
+            trainer_id = stoi(substr);
 
             action = new Close(trainer_id);
             break;
@@ -187,7 +176,7 @@ void Studio::handleInput() {
             break;
         case PRINT_TRAINER_STATUS:
             getline(ss, substr, ' ');
-            trainer_id = std::stoi(substr);
+            trainer_id = stoi(substr);
 
             action = new PrintTrainerStatus(trainer_id);
             break;
