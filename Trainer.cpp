@@ -20,6 +20,11 @@ void Trainer::removeCustomer(int id){
             break;
         }
     }
+    for(size_t i = 0; i<orderList.size(); i++) {
+        OrderPair p = orderList[i];
+        if(id == p.first)
+            orderList.erase(orderList.begin() + i);
+    }
 }
 
 int Trainer::getCapacity() const {
@@ -55,8 +60,12 @@ std::vector<Customer *> &Trainer::getCustomers() {
 }
 
 void Trainer::order(const int customer_id, const std::vector<int> workout_ids, const std::vector<Workout> &workout_options) {
-    for(int id : workout_ids){
+    for (int id: workout_ids) {
         OrderPair p = std::make_pair(customer_id, workout_options[id]);
         orderList.push_back(p);
     }
+}
+
+std::vector<OrderPair> &Trainer::getOrders() {
+    return orderList;
 }
