@@ -1,4 +1,17 @@
+#include <string>
+#include <iostream>
+#include "Trainer.h"
+
+
 Trainer::Trainer(int t_capacity): capacity(t_capacity) {}
+
+void Trainer::open() {
+    this->open = true;
+}
+
+void Trainer::close() {
+    this->open = false;
+}
 
 bool Trainer::isOpen(){
     return open;

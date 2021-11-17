@@ -18,6 +18,8 @@ public:
     void order(const int customer_id, const std::vector<int> workout_ids, const std::vector<Workout>& workout_options);
     int getSalary();
     bool isOpen();
+    void open();
+    void close();
 private:
     int capacity;
     bool open{};
