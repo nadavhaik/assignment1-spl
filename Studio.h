@@ -3,6 +3,7 @@
 
 #include "Trainer.h"
 #include "Action.h"
+#include <unordered_map>
 
 
 class Studio{
@@ -27,6 +28,7 @@ private:
     std::vector<Trainer*> trainers;
     std::vector<Workout> workout_options;
     std::vector<BaseAction*> actionsLog;
+    std::unordered_map<std::string, ActionType> action_prefixes;
 };
 
 #endif

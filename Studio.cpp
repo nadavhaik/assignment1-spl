@@ -12,6 +12,17 @@ using namespace std;
 Studio::Studio() {}
 
 Studio::Studio(const std::string &configFilePath) {
+    //                     Prefix:               Action:
+    action_prefixes = {{"open",            OPEN_TRAINER},
+                       {"order",           ORDER},
+                       {"move",            MOVE_CUSTOMER},
+                       {"close",           CLOSE},
+                       {"closeall",        CLOSE_ALL},
+                       {"workout_options", PRINT_WORKOUT_OPTIONS},
+                       {"status",          PRINT_TRAINER_STATUS},
+                       {"log",             PRINT_ACTIONS_LOG},
+                       {"backup",          BACKUP_STUDIO},
+                       {"restore",         RESTORE_STUDIO}};
     open = false;
     next_customer_id = 0;
     customer_id_backup = -1;
@@ -82,7 +93,6 @@ vector<Workout> &Studio::getWorkoutOptions() {
 void Studio::start() {
     this->open = true;
     cout << "Studio is now open!" << std::endl;
-    string input;
     mainLoop();
 }
 
@@ -94,18 +104,7 @@ int Studio::allocateNewCustomerId() {
 void Studio::handleInput() {
     string input_command;
     BaseAction *action;
-    string substr;                                              //  Prefix:              Action Enum:
-    const unordered_map<string, ActionType> &action_prefixes = {{"open",            OPEN_TRAINER},
-                                                                {"order",           ORDER},
-                                                                {"move",            MOVE_CUSTOMER},
-                                                                {"close",           CLOSE},
-                                                                {"closeall",        CLOSE_ALL},
-                                                                {"workout_options", PRINT_WORKOUT_OPTIONS},
-                                                                {"status",          PRINT_TRAINER_STATUS},
-                                                                {"log",             PRINT_ACTIONS_LOG},
-                                                                {"backup",          BACKUP_STUDIO},
-                                                                {"restore",         RESTORE_STUDIO}};
-
+    string substr;
     getline(cin, input_command);
     stringstream ss(input_command);
     if(input_command.rfind(' ') == -1)
