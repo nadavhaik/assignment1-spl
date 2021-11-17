@@ -1,9 +1,4 @@
 #include "Action.h"
-#include <string>
-#include <iostream>
-extern Studio* backup;
-
-
 using namespace std;
 
 BaseAction::BaseAction() : status(ERROR) {
@@ -23,27 +18,6 @@ void BaseAction::error(std::string errorMsg){
     cout << errorMsg << std::endl;
 }
 
-
 string BaseAction::getErrorMsg() const {
     return errorMsg;
-}
-
-OpenTrainer::OpenTrainer(int id, std::vector<Customer *> &customersList): trainerId(id), customers(customersList){}
-
-void OpenTrainer::act(Studio &studio) {
-
-}
-
-Order::Order(int trainer_id) {
-    id = trainer_id;
-}
-
-void Order::act(Studio &studio) {
-
-}
-
-MoveCustomer::MoveCustomer(int src, int dst, int customerId) {
-    srcTrainer = sr
-            c;
-
 }
