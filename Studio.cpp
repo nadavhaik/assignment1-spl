@@ -94,8 +94,9 @@ void Studio::handleInput() {
     ActionType actionType;
     std::string substr;
 
-    std::cin >> input_command;
+    getline(cin, input_command);
     std::stringstream ss(input_command);
+
 
     if(input_command.rfind(' ') == -1)
         substr = input_command;
