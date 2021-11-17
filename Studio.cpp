@@ -39,13 +39,13 @@ Studio::Studio(const std::string &configFilePath) {
         if(line.find_first_of('#') != 0 && !line.empty()) {
             if(number_of_trainers == -1)
                 number_of_trainers = stoi(line);
-            else if(this->trainers.empty()) {
+            else if(trainers.empty()) {
                 stringstream ss(line);
                 string substr;
                 while(ss.good()) {
                     getline(ss, substr, ',');
                     int capacity = std::stoi(substr);
-                    this->trainers.push_back(new Trainer(capacity));
+                    trainers.push_back(new Trainer(capacity));
                 }
             } else {
                 stringstream ss(line);
