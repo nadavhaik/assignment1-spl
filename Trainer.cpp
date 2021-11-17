@@ -53,3 +53,10 @@ int Trainer::getSalary() {
 std::vector<Customer *> &Trainer::getCustomers() {
     return customersList;
 }
+
+void Trainer::order(const int customer_id, const std::vector<int> workout_ids, const std::vector<Workout> &workout_options) {
+    for(int id : workout_ids){
+        OrderPair p = std::make_pair(customer_id, workout_options[id]);
+        orderList.push_back(p);
+    }
+}

@@ -10,6 +10,7 @@
 #include "Trainer.h"
 #include "Trainer.cpp"
 #include "Action.h"
+#include "Action.cpp"
 
 
 class Studio{		
