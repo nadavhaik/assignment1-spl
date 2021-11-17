@@ -1,8 +1,12 @@
-#include "BaseAction.cpp"
-#include "OpenTrainer.cpp"
-#include "Order.cpp"
-#include "Studio.h"
 #include <iostream>
+#include <string>
+#include <vector>
+#include <sstream>
+#include <fstream>
+#include "Studio.h"
+#include "Studio.cpp"
+#include "Trainer.cpp"
+#include "Workout.cpp"
 
 using namespace std;
 

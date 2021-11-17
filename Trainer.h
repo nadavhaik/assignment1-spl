@@ -1,10 +1,8 @@
-#pragma once
+#include "Workout.h"
+#include "Customer.h"
+
 #ifndef TRAINER_H_
 #define TRAINER_H_
-
-#include <vector>
-#include "Customer.h"
-#include "Workout.h"
 
 typedef std::pair<int, Workout> OrderPair;
 

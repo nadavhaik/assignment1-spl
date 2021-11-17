@@ -1,9 +1,11 @@
-#include <vector>
-#include <string>
-#include <sstream>
-#include "Studio.h"
-#include "Action.h"
-
+#include "Customer.cpp"
+#include "MoveCustomer.cpp"
+#include "CloseAll.cpp"
+#include "PrintWorkoutOptions.cpp"
+#include "PrintTrainerStatus.cpp"
+#include "PrintActionsLog.cpp"
+#include "BackupStudio.cpp"
+#include "RestoreStudio.cpp"
 Studio::Studio() {}
 
 Studio::Studio(const std::string &configFilePath) {

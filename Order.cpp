@@ -1,8 +1,12 @@
+#include "Trainer.h"
 #include "Action.h"
 #include "Studio.h"
+
+
 using namespace std;
 
-Order::Order(int id) : trainerId(id) {
+
+Order::Order(int id) : BaseAction(), trainerId(id) {
 
 }
 

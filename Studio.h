@@ -1,16 +1,11 @@
-#pragma once
 #ifndef STUDIO_H_
 #define STUDIO_H_
-#include <vector>
-#include <string>
-#include <fstream>
-#include <sstream>
-#include "Workout.h"
-#include "Workout.cpp"
-#include "Trainer.h"
-#include "Trainer.cpp"
 
-class Studio{		
+#include "Trainer.h"
+#include "Action.h"
+
+
+class Studio{
 public:
 	Studio();
     Studio(const std::string &configFilePath);
@@ -21,9 +16,9 @@ public:
     std::vector<Workout>& getWorkoutOptions();
 
 private:
-    bool open;
-    int next_customer_id;
-    int customer_id_backup;
+    bool open{};
+    int next_customer_id{};
+    int customer_id_backup{};
     int allocateNewCustomerId();
     void backupCustomerId();
     void restoreCustomerIdFromBackup();

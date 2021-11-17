@@ -1,4 +1,7 @@
+#include <string>
+#include <iostream>
 #include "Action.h"
+
 using namespace std;
 
 BaseAction::BaseAction() : status(ERROR) {
@@ -21,4 +24,3 @@ void BaseAction::error(std::string errorMsg){
 string BaseAction::getErrorMsg() const {
     return errorMsg;
 }
-

@@ -1,6 +1,10 @@
 #include "Action.h"
+#include <string>
+
+
 using namespace std;
-OpenTrainer::OpenTrainer(int id, vector<Customer *> &customersList) : trainerId(id) {
+
+OpenTrainer::OpenTrainer(int id, vector<Customer *> &customersList) : BaseAction(), trainerId(id) {
 
 
 }

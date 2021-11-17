@@ -1,9 +1,7 @@
 #ifndef CUSTOMER_H_
 #define CUSTOMER_H_
-
-#include <vector>
-#include <string>
 #include "Workout.h"
+#include <vector>
 
 class Customer{
 public:

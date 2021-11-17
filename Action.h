@@ -1,8 +1,7 @@
 #ifndef ACTION_H_
 #define ACTION_H_
-
+#include <vector>
 #include <string>
-#include <iostream>
 #include "Customer.h"
 
 enum ActionStatus{
@@ -100,7 +99,7 @@ public:
     void act(Studio &studio);
     std::string toString() const;
 private:
-    const int trainerId;
+    const int trainerId{};
 };
 
 

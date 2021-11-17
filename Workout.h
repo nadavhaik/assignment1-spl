@@ -1,9 +1,8 @@
 #pragma once
+#include <string>
 #ifndef WORKOUT_H_
 #define WORKOUT_H_
-
 #include <string>
-
 enum WorkoutType{
     ANAEROBIC, MIXED, CARDIO
 };
