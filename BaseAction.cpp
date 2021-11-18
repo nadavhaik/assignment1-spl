@@ -24,3 +24,5 @@ void BaseAction::error(std::string errorMsg){
 string BaseAction::getErrorMsg() const {
     return errorMsg;
 }
+
+BaseAction::~BaseAction() = default;

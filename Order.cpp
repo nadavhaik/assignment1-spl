@@ -11,8 +11,10 @@ Order::Order(int id) : BaseAction(), trainerId(id) {
 
 void Order::act(Studio &studio) {
     Trainer *t = studio.getTrainer(trainerId);
-    if(!t->isOpen())
+    if(t == nullptr || !t->isOpen()) {
+        error("Trainer does not exist or is not open");
         return;
+    }
     vector<Customer*> customers = t->getCustomers();
     const vector<Workout> &workoutOptions = studio.getWorkoutOptions();
 
@@ -29,7 +31,7 @@ void Order::act(Studio &studio) {
         s.append(customer_name);
         s.append(" Is Doing ");
         s.append(activity_name);
-        s.append("\r");
+        s.append("\n");
     }
 
     complete();

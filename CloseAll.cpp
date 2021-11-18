@@ -10,9 +10,12 @@ CloseAll::CloseAll(): BaseAction() {
 void CloseAll::act(Studio &studio) {
     // closing each
     for(int i = 0; i < studio.getNumOfTrainers(); i++) {
-        Close close_action(i);
-        close_action.act(studio);
-        s.append(close_action.toString());
+        Trainer *t = studio.getTrainer(i);
+        if(t->isOpen()){
+            Close close_action(i);
+            close_action.act(studio);
+            s.append(close_action.toString());
+        }
     }
     complete();
 }

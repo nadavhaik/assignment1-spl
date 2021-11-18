@@ -22,6 +22,7 @@ class Studio;
 class BaseAction{
 public:
     BaseAction();
+    virtual ~BaseAction();
     ActionStatus getStatus() const;
     virtual void act(Studio& studio)=0;
     virtual std::string toString() const=0;

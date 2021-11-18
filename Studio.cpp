@@ -205,6 +205,7 @@ bool Studio::handleInput() {
 
 
     action->act(*this);
+    string s = action -> toString();
     switch(action->getStatus()) {
         case COMPLETED:
             cout << action->toString();
@@ -215,6 +216,7 @@ bool Studio::handleInput() {
             break;
     }
 
+    delete action;
     return actionType != CLOSE_ALL;
 }
 

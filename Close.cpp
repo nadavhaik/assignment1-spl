@@ -17,7 +17,7 @@ void Close::act(Studio &studio) {
     s.append(to_string(trainerId));
     s.append(" closed. Salary ");
     s.append(to_string(t->getSalary()));
-    s.append("NIS\r");
+    s.append("NIS\n");
     t->closeTrainer();
     complete();
 
