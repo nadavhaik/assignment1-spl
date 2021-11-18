@@ -1,4 +1,6 @@
 #include <algorithm>
+#include "Customer.h"
+
 
 Customer::Customer(std::string c_name, int c_id) :
         id(c_id), name(c_name) {}
@@ -10,6 +12,8 @@ int Customer::getId() const {
 std::string Customer::getName() const {
     return name;
 }
+
+Customer::~Customer() = default;
 
 SweatyCustomer::SweatyCustomer(std::string name, int id) : Customer(name, id) {
 

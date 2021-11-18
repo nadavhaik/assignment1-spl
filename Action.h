@@ -3,6 +3,9 @@
 #include <vector>
 #include <string>
 #include "Customer.h"
+#include "Trainer.h"
+//#include "Studio.cpp"
+
 
 enum ActionStatus{
     COMPLETED, ERROR
@@ -49,6 +52,7 @@ public:
     void act(Studio &studio);
     std::string toString() const;
 private:
+    std::string s;
     const int trainerId;
 };
 
@@ -72,6 +76,7 @@ public:
     std::string toString() const;
 private:
     const int trainerId;
+    std::string s;
 };
 
 
@@ -81,6 +86,7 @@ public:
     void act(Studio &studio);
     std::string toString() const;
 private:
+    std::string s;
 };
 
 

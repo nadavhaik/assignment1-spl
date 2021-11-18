@@ -1,17 +1,9 @@
 #include <string>
 #include <iostream>
 #include "Trainer.h"
-
+#include "Trainer.h"
 
 Trainer::Trainer(int t_capacity): capacity(t_capacity) {}
-
-void Trainer::open() {
-    this->open = true;
-}
-
-void Trainer::close() {
-    this->open = false;
-}
 
 bool Trainer::isOpen(){
     return open;
@@ -19,8 +11,11 @@ bool Trainer::isOpen(){
 
 void Trainer::addCustomer(Customer* customer){
     customersList.push_back(customer);
+    customer_by_id_index.insert({customer->getId(), customer});
 }
+
 void Trainer::removeCustomer(int id){
+    customer_by_id_index.erase(id); // deleting from the index
     for(std::size_t i = 0; i<customersList.size();i++) {
         Customer *c = customersList[i];
         if(c->getId() == id) {
@@ -29,6 +24,8 @@ void Trainer::removeCustomer(int id){
             break;
         }
     }
+
+    // Deleting all orders
     for(size_t i = 0; i<orderList.size(); i++) {
         OrderPair p = orderList[i];
         if(id == p.first)
@@ -42,17 +39,9 @@ int Trainer::getCapacity() const {
 
 //should we throw an invalid argument error ? - not mentioned
 Customer *Trainer::getCustomer(int id) {
-    Customer* required_cus;
-    bool found = false;
-    for (Customer* c : customersList) {
-        if(c->getId() == id) {
-            required_cus = c;
-            found = true;
-        }
-    }
-    if(!found)
-        throw std::invalid_argument("no such customer!");
-    return required_cus;
+    if(customer_by_id_index.find(id) == customer_by_id_index.end()) // id doesn't exist
+        return nullptr;
+    return customer_by_id_index.at(id);
 }
 
 //shouldn't we check if the workout was completed ? - not mentioned
@@ -77,4 +66,23 @@ void Trainer::order(const int customer_id, const std::vector<int> workout_ids, c
 
 std::vector<OrderPair> &Trainer::getOrders() {
     return orderList;
+}
+
+void Trainer::openTrainer() {
+   open = true;
+}
+
+void Trainer::closeTrainer() {
+    for(Customer *c : customersList)
+        delete c;
+    open = false;
+}
+
+bool Trainer::canAcceptAnotherCustomer() {
+    return customersList.size() < capacity;
+}
+
+Trainer::~Trainer() {
+    if(isOpen())
+        closeTrainer();
 }

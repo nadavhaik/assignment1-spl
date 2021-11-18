@@ -1,12 +1,19 @@
 #include <unordered_map>
 #include "Customer.cpp"
 #include "MoveCustomer.cpp"
+#include "Close.cpp"
 #include "CloseAll.cpp"
 #include "PrintWorkoutOptions.cpp"
 #include "PrintTrainerStatus.cpp"
 #include "PrintActionsLog.cpp"
 #include "BackupStudio.cpp"
 #include "RestoreStudio.cpp"
+#include "OpenTrainer.cpp"
+#include "Order.cpp"
+#include "BaseAction.cpp"
+#include "Studio.h"
+
+
 using namespace std;
 
 Studio::Studio() {}
@@ -16,7 +23,7 @@ Studio::Studio(const std::string &configFilePath) {
     action_prefixes = {{"open",            OPEN_TRAINER},
                        {"order",           ORDER},
                        {"move",            MOVE_CUSTOMER},
-                       {"close",           CLOSE},
+                       {"clearAllTrainers",           CLOSE},
                        {"closeall",        CLOSE_ALL},
                        {"workout_options", PRINT_WORKOUT_OPTIONS},
                        {"status",          PRINT_TRAINER_STATUS},
@@ -79,7 +86,9 @@ int Studio::getNumOfTrainers() const {
 }
 
 Trainer *Studio::getTrainer(int tid) {
-    return this->trainers[tid];
+    if(tid >= trainers.size())
+        return nullptr;
+    return trainers[tid];
 }
 
 const vector<BaseAction *> &Studio::getActionsLog() const {
@@ -101,12 +110,15 @@ int Studio::allocateNewCustomerId() {
     return next_customer_id-1;
 }
 
-void Studio::handleInput() {
+bool Studio::handleInput() {
+    // variables
     string input_command;
     BaseAction *action;
     string substr;
     getline(cin, input_command);
     stringstream ss(input_command);
+
+    // reading the first word
     if(input_command.rfind(' ') == -1)
         substr = input_command;
     else
@@ -126,12 +138,13 @@ void Studio::handleInput() {
             getline(ss, substr, ' ');
             trainer_id = stoi(substr);
             while (ss.good()) {
-                getline(ss, substr, ' ');
                 Customer *c;
                 string customer_name;
                 string strategy;
                 getline(ss, customer_name, ',');
                 getline(ss, strategy, ' ');
+
+                // creating a new customer by strategy
                 if (strategy == "swt")
                     c = new SweatyCustomer(customer_name, allocateNewCustomerId());
                 else if (strategy == "chp")
@@ -190,23 +203,23 @@ void Studio::handleInput() {
             break;
     }
 
+
     action->act(*this);
     switch(action->getStatus()) {
         case COMPLETED:
+            cout << action->toString();
             break;
         case ERROR:
             if(actionType == OPEN_TRAINER)
                 restoreCustomerIdFromBackup(); // to make customer ids consistent even if fails
             break;
     }
+
+    return actionType != CLOSE_ALL;
 }
 
 void Studio::mainLoop() {
-    while(true) {
-        handleInput();
-        if (trainers.empty())
-            break;
-    }
+    while(handleInput());
 }
 
 void Studio::backupCustomerId() {
@@ -217,6 +230,14 @@ void Studio::restoreCustomerIdFromBackup() {
     int temp = customer_id_backup;
     customer_id_backup = -1;
     next_customer_id = temp;
+}
+
+Studio::~Studio() {
+    for(BaseAction *action : actionsLog)
+        delete action;
+    for(Trainer *t : trainers)
+        delete t;
+
 }
 
 

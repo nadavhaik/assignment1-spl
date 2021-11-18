@@ -1,15 +1,16 @@
-#ifndef STUDIO_H_
-#define STUDIO_H_
-
 #include "Trainer.h"
 #include "Action.h"
 #include <unordered_map>
+
+#ifndef STUDIO_H_
+#define STUDIO_H_
 
 
 class Studio{
 public:
 	Studio();
     Studio(const std::string &configFilePath);
+    ~Studio();
     void start();
     int getNumOfTrainers() const;
     Trainer* getTrainer(int tid);
@@ -24,7 +25,7 @@ private:
     void backupCustomerId();
     void restoreCustomerIdFromBackup();
     void mainLoop();
-    void handleInput();
+    bool handleInput();
     std::vector<Trainer*> trainers;
     std::vector<Workout> workout_options;
     std::vector<BaseAction*> actionsLog;
