@@ -8,6 +8,12 @@ OpenTrainer::OpenTrainer(int id, vector<Customer *> &customersList):
 }
 
 void OpenTrainer::act(Studio &studio) {
+
+    // building the string - because the customers might be deleted from the heap later
+    s = "open " + to_string(trainerId);
+    for(Customer *c : customers)
+        s+= " " + c->toString();
+
     Trainer *t = studio.getTrainer(trainerId);
     if(t == nullptr || t->isOpen()) {
         for(Customer *c : customers) // Avoiding memory leaks
@@ -28,5 +34,8 @@ void OpenTrainer::act(Studio &studio) {
 }
 
 string OpenTrainer::toString() const {
-    return "";
+    if(getStatus() == COMPLETED)
+        return s + " Completed";
+    return s + " Error: Workout session does not exist or is already open.";
+
 }

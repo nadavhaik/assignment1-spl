@@ -13,11 +13,7 @@ void Close::act(Studio &studio) {
         return;
     }
 
-    s.append("Trainer ");
-    s.append(to_string(trainerId));
-    s.append(" closed. Salary ");
-    s.append(to_string(t->getSalary()));
-    s.append("NIS\n");
+    cout<< "Trainer "<< trainerId << " closed. Salary: "  << t->getSalary()<< "NIS"<< endl;
     t->closeTrainer();
     complete();
 

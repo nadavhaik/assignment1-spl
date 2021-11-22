@@ -209,17 +209,10 @@ bool Studio::handleInput() {
 
     action->act(*this);
     string s = action -> toString();
-    switch(action->getStatus()) {
-        case COMPLETED:
-            cout << action->toString();
-            break;
-        case ERROR:
-            if(actionType == OPEN_TRAINER)
-                restoreCustomerIdFromBackup(); // to make customer ids consistent even if fails
-            break;
+    if(action->getStatus() == ERROR && actionType == OPEN_TRAINER) {
+        restoreCustomerIdFromBackup(); // to make customer ids consistent even if fails]
     }
-
-    delete action;
+    actionsLog.insert(actionsLog.begin(), action);
     return actionType != CLOSE_ALL;
 }
 
