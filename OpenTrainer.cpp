@@ -18,7 +18,7 @@ void OpenTrainer::act(Studio &studio) {
 
     Trainer *t = studio.getTrainer(trainerId);
     if (t == nullptr || t->isOpen()) {
-        for (Customer *c: customers) // Avoiding memory leaks
+        for (Customer *c : customers) // Avoiding memory leaks
             delete c;
         error("Workout session does not exist or is already open.");
         return;

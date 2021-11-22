@@ -137,26 +137,23 @@ bool Studio::handleInput() {
             backupCustomerId(); // for case of failure - we'll want to roll back the ids allocation
             getline(ss, substr, ' ');
             trainer_id = stoi(substr);
-            t = getTrainer(trainer_id);
-            if(t != nullptr) { // else - an error will be raised in the action itself
-                while (ss.good()) {
-                    Customer *c;
-                    string customer_name;
-                    string strategy;
-                    getline(ss, customer_name, ',');
-                    getline(ss, strategy, ' ');
+            while (ss.good()) {
+                Customer *c;
+                string customer_name;
+                string strategy;
+                getline(ss, customer_name, ',');
+                getline(ss, strategy, ' ');
 
-                    // creating a new customer by strategy
-                    if (strategy == "swt")
-                        c = new SweatyCustomer(customer_name, allocateNewCustomerId());
-                    else if (strategy == "chp")
-                        c = new CheapCustomer(customer_name, allocateNewCustomerId());
-                    else if (strategy == "mcl")
-                        c = new HeavyMuscleCustomer(customer_name, allocateNewCustomerId());
-                    else if (strategy == "fbd")
-                        c = new FullBodyCustomer(customer_name, allocateNewCustomerId());
-                    customerList.push_back(c);
-                }
+                // creating a new customer by strategy
+                if (strategy == "swt")
+                    c = new SweatyCustomer(customer_name, allocateNewCustomerId());
+                else if (strategy == "chp")
+                    c = new CheapCustomer(customer_name, allocateNewCustomerId());
+                else if (strategy == "mcl")
+                    c = new HeavyMuscleCustomer(customer_name, allocateNewCustomerId());
+                else if (strategy == "fbd")
+                    c = new FullBodyCustomer(customer_name, allocateNewCustomerId());
+                customerList.push_back(c);
             }
 
             action = new OpenTrainer(trainer_id, customerList);
