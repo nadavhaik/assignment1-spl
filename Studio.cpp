@@ -208,12 +208,16 @@ bool Studio::handleInput() {
 
 
     action->act(*this);
-    string s = action -> toString();
     if(action->getStatus() == ERROR && actionType == OPEN_TRAINER) {
         restoreCustomerIdFromBackup(); // to make customer ids consistent even if fails]
     }
+    if(actionType == CLOSE_ALL) {
+        // deletes the last pointer and breaks mainLoop
+        delete action;
+        return false;
+    }
     actionsLog.insert(actionsLog.begin(), action);
-    return actionType != CLOSE_ALL;
+    return true;
 }
 
 void Studio::mainLoop() {
