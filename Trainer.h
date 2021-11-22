@@ -23,6 +23,7 @@ public:
     bool isOpen();
     void openTrainer();
     void closeTrainer();
+
 private:
     int capacity;
     bool open{};

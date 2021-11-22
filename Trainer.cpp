@@ -86,3 +86,4 @@ Trainer::~Trainer() {
     if(isOpen())
         closeTrainer();
 }
+
