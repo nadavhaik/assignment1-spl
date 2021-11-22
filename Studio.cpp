@@ -23,7 +23,7 @@ Studio::Studio(const std::string &configFilePath) {
     action_prefixes = {{"open",            OPEN_TRAINER},
                        {"order",           ORDER},
                        {"move",            MOVE_CUSTOMER},
-                       {"clearAllTrainers",           CLOSE},
+                       {"clearAllTrainers",CLOSE},
                        {"closeall",        CLOSE_ALL},
                        {"workout_options", PRINT_WORKOUT_OPTIONS},
                        {"status",          PRINT_TRAINER_STATUS},
