@@ -40,3 +40,7 @@ std::string Order::toString() const {
         return s + " Completed";
     return s + "Error: Trainer does not exist or is not open";
 }
+
+BaseAction *Order::clone() {
+    return new Order(this->trainerId);
+}

@@ -35,3 +35,7 @@ std::string MoveCustomer::toString() const {
 
     return s + " Error: Cannot move customer";
 }
+
+BaseAction *MoveCustomer::clone() {
+    return new MoveCustomer(this->srcTrainer, this->dstTrainer, this->id);
+}

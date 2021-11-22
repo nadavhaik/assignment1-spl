@@ -1,5 +1,7 @@
 #include "Trainer.h"
 #include "Studio.h"
+#include "Action.h"
+
 #include <string>
 using namespace std;
 
@@ -38,4 +40,14 @@ string OpenTrainer::toString() const {
         return s + " Completed";
     return s + " Error: Workout session does not exist or is already open.";
 
+}
+
+BaseAction *OpenTrainer::clone() {
+    return new OpenTrainer(*this);
+}
+
+OpenTrainer::OpenTrainer(OpenTrainer const &other): trainerId(other.trainerId), s(other.s) {
+    for(Customer *c : other.customers) {
+        customers.push_back(c->clone());
+    }
 }
