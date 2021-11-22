@@ -27,5 +27,5 @@ void PrintTrainerStatus::act(Studio &studio) {
 }
 
 std::string PrintTrainerStatus::toString() const {
-    return std::string();
+    return "";
 }
