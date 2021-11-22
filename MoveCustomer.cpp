@@ -29,5 +29,9 @@ void MoveCustomer::act(Studio &studio) {
 }
 
 std::string MoveCustomer::toString() const {
-    return "";
+    string s = "move " + to_string(srcTrainer) + " " + to_string(dstTrainer) + " " + to_string(id);
+    if(getStatus() == COMPLETED)
+        return s + " Completed";
+
+    return s + " Error: Cannot move customer"
 }

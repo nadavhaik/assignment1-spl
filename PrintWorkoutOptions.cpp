@@ -17,10 +17,5 @@ void PrintWorkoutOptions::act(Studio &studio) {
 }
 
 std::string PrintWorkoutOptions::toString() const {
-    string s;
-    if(this->getStatus() == COMPLETED)
-        s = "PrintTrainerStatus Completed";
-    else
-        s = "PrintTrainerStatus Error";
-    return s;
+    return "workout_options Completed";
 }

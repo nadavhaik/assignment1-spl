@@ -27,10 +27,5 @@ void PrintTrainerStatus::act(Studio &studio) {
 }
 
 std::string PrintTrainerStatus::toString() const {
-    string s;
-    if(this->getStatus() == COMPLETED)
-        s = "PrintTrainerStatus " + to_string(trainerId) + " Completed";
-    else
-        s = "PrintTrainerStatus " + to_string(trainerId) + " Error";
-    return s;
+    return "status " + to_string(trainerId) + " Completed";
 }

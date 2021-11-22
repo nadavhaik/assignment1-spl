@@ -14,12 +14,11 @@ void CloseAll::act(Studio &studio) {
         if(t->isOpen()){
             Close close_action(i);
             close_action.act(studio);
-            s.append(close_action.toString());
         }
     }
     complete();
 }
 
 std::string CloseAll::toString() const {
-    return s;
+    return "";
 }

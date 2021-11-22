@@ -20,5 +20,7 @@ void Close::act(Studio &studio) {
 }
 
 std::string Close::toString() const {
-    return s;
+    if(getStatus() == COMPLETED)
+        return "close " + to_string(trainerId) + " Completed";
+    return "close " + to_string(trainerId) + " Error: Trainer does not exist or is not open";
 }
