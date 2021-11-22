@@ -50,8 +50,8 @@ class RunningProgram:
 
     def end_test(self, expected_output: str):
         out, err = self.process.communicate(END_COMMAND.encode())
-        assert_equal(out.decode(), expected_output+"\n")
         os.remove(CPP_OUTPUT)
+        assert_equal(out.decode(), expected_output+"\n")
         sleep(2)
         with open(VALGRIND_LOG_FILE, 'r', encoding='utf8') as log_file:
             valgrind_log = log_file.read()
