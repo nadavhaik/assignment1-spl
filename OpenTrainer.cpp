@@ -12,7 +12,7 @@ void OpenTrainer::act(Studio &studio) {
     // building the string - because the customers might be deleted from the heap later
     s = "open " + to_string(trainerId);
     for(Customer *c : customers)
-        s+= " " + c->toString();
+        s += " " + c->toString();
 
     Trainer *t = studio.getTrainer(trainerId);
     if(t == nullptr || t->isOpen()) {
