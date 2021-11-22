@@ -44,6 +44,7 @@ public:
 private:
 	const int trainerId;
 	std::vector<Customer *> customers;
+    std::string s;
 };
 
 
@@ -53,7 +54,6 @@ public:
     void act(Studio &studio);
     std::string toString() const;
 private:
-    std::string s;
     const int trainerId;
 };
 
@@ -77,7 +77,6 @@ public:
     std::string toString() const;
 private:
     const int trainerId;
-    std::string s;
 };
 
 
@@ -87,7 +86,6 @@ public:
     void act(Studio &studio);
     std::string toString() const;
 private:
-    std::string s;
 };
 
 
