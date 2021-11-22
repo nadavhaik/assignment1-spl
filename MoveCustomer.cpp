@@ -33,5 +33,5 @@ std::string MoveCustomer::toString() const {
     if(getStatus() == COMPLETED)
         return s + " Completed";
 
-    return s + " Error: Cannot move customer"
+    return s + " Error: Cannot move customer";
 }

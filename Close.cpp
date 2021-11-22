@@ -13,7 +13,7 @@ void Close::act(Studio &studio) {
         return;
     }
 
-    cout<< "Trainer "<< trainerId << " closed. Salary: "  << t->getSalary()<< "NIS"<< endl;
+    cout<< "Trainer "<< trainerId << " closed. Salary "  << t->getSalary()<< "NIS"<< endl;
     t->closeTrainer();
     complete();
 

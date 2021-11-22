@@ -28,15 +28,15 @@ void Order::act(Studio &studio) {
     for(const OrderPair &p : t->getOrders()) {
         const string customer_name = t->getCustomer(p.first)->getName();
         const string activity_name = p.second.getName();
-        s.append(customer_name);
-        s.append(" Is Doing ");
-        s.append(activity_name);
-        s.append("\n");
+        cout << customer_name << " Is Doing "  << activity_name << endl;
     }
 
     complete();
 }
 
 std::string Order::toString() const {
-    return s;
+    string s = "order " + to_string(trainerId);
+    if(getStatus() == COMPLETED)
+        return s + " Completed";
+    return s + "Error: Trainer does not exist or is not open";
 }
