@@ -19,3 +19,7 @@ void PrintWorkoutOptions::act(Studio &studio) {
 std::string PrintWorkoutOptions::toString() const {
     return "workout_options Completed";
 }
+
+BaseAction *PrintWorkoutOptions::clone() {
+    return new PrintWorkoutOptions();
+}

@@ -14,3 +14,7 @@ void PrintActionsLog::act(Studio &studio) {
 std::string PrintActionsLog::toString() const {
     return "log Completed";
 }
+
+BaseAction *PrintActionsLog::clone() {
+    return new PrintActionsLog();
+}

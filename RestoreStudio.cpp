@@ -20,3 +20,7 @@ std::string RestoreStudio::toString() const {
         return "restore Completed";
     return "restore Error: No backup available";
 }
+
+BaseAction *RestoreStudio::clone() {
+    return new RestoreStudio();
+}

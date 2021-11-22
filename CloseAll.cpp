@@ -22,3 +22,7 @@ void CloseAll::act(Studio &studio) {
 std::string CloseAll::toString() const {
     return "";
 }
+
+BaseAction *CloseAll::clone() {
+    return new CloseAll();
+}

@@ -29,3 +29,7 @@ void PrintTrainerStatus::act(Studio &studio) {
 std::string PrintTrainerStatus::toString() const {
     return "status " + to_string(trainerId) + " Completed";
 }
+
+BaseAction *PrintTrainerStatus::clone() {
+    return new PrintTrainerStatus(trainerId);
+}
