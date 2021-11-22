@@ -4,12 +4,11 @@ using namespace std;
 PrintTrainerStatus::PrintTrainerStatus(int id): BaseAction(), trainerId(id) {}
 
 void PrintTrainerStatus::act(Studio &studio) {
-//    if(!studio.getTrainer(trainerId)->isOpen()) {
-//        error("this trainer is close");
-//        return;
-//    }
     int t_salary = 0;
     cout<< "Trainer "<< trainerId << " status: "<< studio.getTrainer(trainerId)->isOpen()<< endl;
+    if(!studio.getTrainer(trainerId)->isOpen()) {
+        return;
+    }
     cout<<"Costumers:"<<endl;
     for(const Customer* c: studio.getTrainer(trainerId)->getCustomers()){
         cout<<c->getId() << " " << c->getName()<< endl;
