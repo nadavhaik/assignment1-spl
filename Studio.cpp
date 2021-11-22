@@ -139,7 +139,7 @@ bool Studio::handleInput() {
             trainer_id = stoi(substr);
             t = getTrainer(trainer_id);
             if(t != nullptr) { // else - an error will be raised in the action itself
-                while (ss.good() && customerList.size() < t->getCapacity()) {
+                while (ss.good()) {
                     Customer *c;
                     string customer_name;
                     string strategy;
