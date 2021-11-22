@@ -23,11 +23,12 @@ public:
     bool isOpen();
     void openTrainer();
     void closeTrainer();
+    Trainer* clone();
+    Trainer(Trainer const &other);
 
 private:
     int capacity;
     bool open{};
-    std::string s;
     std::vector<Customer*> customersList;
     std::unordered_map<int, Customer*> customer_by_id_index;
     std::vector<OrderPair> orderList; //A list of pairs for each order for the trainer - (customer_id, Workout)

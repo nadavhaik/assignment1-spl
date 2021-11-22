@@ -87,3 +87,23 @@ Trainer::~Trainer() {
         closeTrainer();
 }
 
+Trainer *Trainer::clone() {
+    return new Trainer(*this);
+
+}
+
+Trainer::Trainer(const Trainer &other): capacity(other.capacity), open(other.open) {
+    for(Customer* c: other.customersList){
+        Customer* cloned_c = c->clone();
+        customersList.push_back(cloned_c);
+        customer_by_id_index.insert({cloned_c->getId(), cloned_c});
+    }
+    for(const OrderPair& p : other.orderList){
+        OrderPair cloned_p = std::make_pair(p.first,p.second);
+        orderList.push_back(cloned_p);
+    }
+}
+
+
+
+
