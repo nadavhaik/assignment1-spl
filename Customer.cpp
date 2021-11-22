@@ -32,6 +32,10 @@ std::string SweatyCustomer::toString() const {
     return getName() + "," +"swt";
 }
 
+Customer *SweatyCustomer::clone() {
+    return new SweatyCustomer(this->getName(), this->getId());
+}
+
 CheapCustomer::CheapCustomer(std::string name, int id) : Customer(name, id) {
 
 }
@@ -57,6 +61,10 @@ std::vector<int> CheapCustomer::order(const std::vector<Workout> &workout_option
 
 std::string CheapCustomer::toString() const {
     return getName() + "," +"chp";
+}
+
+Customer *CheapCustomer::clone() {
+    return new CheapCustomer(this->getName(), this->getId());
 }
 
 HeavyMuscleCustomer::HeavyMuscleCustomer(std::string name, int id) : Customer(name, id) {
@@ -86,6 +94,10 @@ std::vector<int> HeavyMuscleCustomer::order(const std::vector<Workout> &workout_
 
 std::string HeavyMuscleCustomer::toString() const {
     return getName() + "," +"mcl";
+}
+
+Customer *HeavyMuscleCustomer::clone() {
+    return new HeavyMuscleCustomer(this->getName(), this->getId());
 }
 
 FullBodyCustomer::FullBodyCustomer(std::string name, int id) : Customer(name, id) {
@@ -139,6 +151,10 @@ std::vector<int> FullBodyCustomer::order(const std::vector<Workout> &workout_opt
 
 std::string FullBodyCustomer::toString() const {
     return getName() + "," +"fbd";
+}
+
+Customer *FullBodyCustomer::clone() {
+    return new FullBodyCustomer(this->getName(), this->getId());
 }
 
 

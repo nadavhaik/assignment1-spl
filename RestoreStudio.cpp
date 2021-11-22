@@ -1,12 +1,17 @@
 #include "Action.h"
 
 using namespace std;
+extern Studio *backup;
 
 RestoreStudio::RestoreStudio() {
 
 }
 
 void RestoreStudio::act(Studio &studio) {
+    if(backup == nullptr) {
+        error("No backup available");
+        return;
+    }
 
 }
 
