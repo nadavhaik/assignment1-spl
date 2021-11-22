@@ -11,5 +11,7 @@ void RestoreStudio::act(Studio &studio) {
 }
 
 std::string RestoreStudio::toString() const {
-    return std::string();
+    if(getStatus() == COMPLETED)
+        return "restore Completed";
+    return "restore Error: No backup available";
 }
