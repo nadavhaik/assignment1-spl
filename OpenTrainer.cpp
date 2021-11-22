@@ -24,7 +24,7 @@ void OpenTrainer::act(Studio &studio) {
         return;
     }
     int counter = 0;
-    for (Customer *c : customers) {
+    for (Customer *c : customers) { // Adding only the first t.capacity customers - and deleting the rest
         if(counter < t->getCapacity())
             t->addCustomer(c);
         else // avoiding leaks
