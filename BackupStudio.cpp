@@ -8,6 +8,8 @@ BackupStudio::BackupStudio(): BaseAction() {
 
 void BackupStudio::act(Studio &studio) {
 
+
+    complete();
 }
 
 std::string BackupStudio::toString() const {

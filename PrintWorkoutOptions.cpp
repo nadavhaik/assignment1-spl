@@ -14,6 +14,7 @@ void PrintWorkoutOptions::act(Studio &studio) {
         else if(w.getType() == CARDIO)
             cout<<w.getName() << ", Cardio, " << w.getPrice()<<endl;
     }
+    complete();
 }
 
 std::string PrintWorkoutOptions::toString() const {

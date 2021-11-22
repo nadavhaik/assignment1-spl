@@ -13,6 +13,8 @@ void RestoreStudio::act(Studio &studio) {
         return;
     }
 
+
+    complete();
 }
 
 std::string RestoreStudio::toString() const {

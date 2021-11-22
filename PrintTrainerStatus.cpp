@@ -24,6 +24,7 @@ void PrintTrainerStatus::act(Studio &studio) {
         t_salary += pair.second.getPrice();
     }
     cout<<"Current Trainer's Salary: " << t_salary<< "NIS"<<endl;
+    complete();
 }
 
 std::string PrintTrainerStatus::toString() const {
