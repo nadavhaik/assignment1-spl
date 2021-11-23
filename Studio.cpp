@@ -131,7 +131,6 @@ bool Studio::handleInput() {
     int dest_id;
     int customer_id;
     vector<Customer *> customerList;
-    Trainer *t;
     switch(actionType) {
         case OPEN_TRAINER:
             backupCustomerId(); // for case of failure - we'll want to roll back the ids allocation
