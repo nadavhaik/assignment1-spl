@@ -24,7 +24,6 @@ public:
     void openTrainer();
     void closeTrainer();
     Trainer* clone();
-    void clear();
     Trainer(Trainer const &other);
 
 private:
