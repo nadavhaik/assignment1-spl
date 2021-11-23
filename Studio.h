@@ -12,11 +12,17 @@ public:
     Studio(const std::string &configFilePath);
     Studio(const Studio &other);
     ~Studio();
+//    Studio &operator=(Studio other);
+    Studio &operator=(const Studio &other);
+    Studio &operator=(Studio &&other) noexcept;
+    void clear();
     void start();
     int getNumOfTrainers() const;
     Trainer* getTrainer(int tid);
 	const std::vector<BaseAction*>& getActionsLog() const; // Return a reference to the history of actions
+    static bool hasBackup();
     std::vector<Workout>& getWorkoutOptions();
+
 
 private:
     bool open{};
