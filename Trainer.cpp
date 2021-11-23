@@ -77,7 +77,7 @@ void Trainer::closeTrainer() {
 }
 
 bool Trainer::canAcceptAnotherCustomer() {
-    return customersList.size() < capacity;
+    return (int)customersList.size() < capacity;
 }
 
 Trainer::~Trainer() {

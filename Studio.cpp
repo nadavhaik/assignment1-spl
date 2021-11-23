@@ -84,7 +84,7 @@ int Studio::getNumOfTrainers() const {
 }
 
 Trainer *Studio::getTrainer(int tid) {
-    if(tid >= trainers.size())
+    if(tid < 0 || tid >= getNumOfTrainers())
         return nullptr;
     return trainers[tid];
 }
@@ -117,7 +117,7 @@ bool Studio::handleInput() {
     stringstream ss(input_command);
 
     // reading the first word
-    if(input_command.rfind(' ') == -1)
+    if(input_command.rfind(' ') == string::npos)
         substr = input_command;
     else
         getline(ss, substr, ' ');
@@ -265,8 +265,8 @@ Studio &Studio::operator=(const Studio &other) {
 
 // move constructor
 Studio::Studio(Studio &&other): open(other.open), next_customer_id(other.next_customer_id),
-        workout_options(other.workout_options), action_prefixes(other.action_prefixes),
-        actionsLog(other.actionsLog), trainers(other.trainers) {}
+        trainers(other.trainers),workout_options(other.workout_options),
+        actionsLog(other.actionsLog), action_prefixes(other.action_prefixes) {}
 
 
 // move assignment

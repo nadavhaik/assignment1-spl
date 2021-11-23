@@ -3,7 +3,7 @@
 
 
 Customer::Customer(std::string c_name, int c_id) :
-        id(c_id), name(c_name) {}
+        name(c_name), id(c_id)  {}
 
 int Customer::getId() const {
     return id;
