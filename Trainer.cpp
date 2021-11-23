@@ -72,10 +72,7 @@ void Trainer::openTrainer() {
 }
 
 void Trainer::closeTrainer() {
-    for(Customer *c : customersList)
-        delete c;
-    customersList.clear();
-    orderList.clear();
+    clear();
     open = false;
 }
 
@@ -103,6 +100,14 @@ Trainer::Trainer(const Trainer &other): capacity(other.capacity), open(other.ope
         OrderPair cloned_p = std::make_pair(p.first,p.second);
         orderList.push_back(cloned_p);
     }
+}
+
+void Trainer::clear() {
+    for(Customer *c : customersList)
+        delete c;
+    customersList.clear();
+    customer_by_id_index.clear();
+    orderList.clear();
 }
 
 

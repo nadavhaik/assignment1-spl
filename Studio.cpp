@@ -226,16 +226,55 @@ void Studio::restoreCustomerIdFromBackup() {
 }
 
 Studio::~Studio() {
-    for(BaseAction *action : actionsLog)
-        delete action;
-    for(Trainer *t : trainers) {
-        if (t->isOpen()) { // edge case - may only happen in backup destruction (closeall wasn't called on backup)
-                            // in the main object, the destructor is called after closeall - no trainers will be opened.
-            for(Customer *c: t->getCustomers())
-                delete c;
-        }
-        delete t;
-    }
+    clear();
 }
 
+void Studio::clear() {
+    for(BaseAction *action : actionsLog)
+        delete action;
+    actionsLog.clear();
+    for(Trainer *t : trainers) {
+        delete t;
+    }
+    trainers.clear();
+}
+
+bool Studio::hasBackup() {
+    return backup != nullptr;
+}
+
+
+// copy assignment
+Studio &Studio::operator=(const Studio &other) {
+   if(this == &other)
+       return *this;
+
+    clear();
+    open = other.open;
+    next_customer_id = other.next_customer_id;
+    customer_id_backup = other.customer_id_backup;
+
+    for(BaseAction *action : other.actionsLog)
+        actionsLog.push_back(action->clone());
+    for(Trainer *t : other.trainers)
+        trainers.push_back(t->clone());
+
+
+    return *this;
+}
+
+// move assignment
+Studio &Studio::operator=(Studio &&other) noexcept {
+    if(this == &other)
+        return *this;
+
+    clear();
+    open = other.open;
+    next_customer_id = other.next_customer_id;
+    customer_id_backup = other.customer_id_backup;
+    actionsLog = other.actionsLog;
+    trainers = other.trainers;
+
+    return *this;
+}
 
