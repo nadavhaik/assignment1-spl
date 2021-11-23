@@ -12,8 +12,6 @@ niv Is Doing Rope Jumps""")
     p.assert_command_returns("close 3", "Trainer 3 closed. Salary 270NIS")
     p.assert_command_returns("restore", "")
 
-
-
 finally:
     p.end_test("Trainer 3 closed. Salary 270NIS")
 
