@@ -22,15 +22,12 @@ public:
 	const std::vector<BaseAction*>& getActionsLog() const; // Return a reference to the history of actions
     static bool hasBackup();
     std::vector<Workout>& getWorkoutOptions();
-
+    void deleteCustomerAndRollbackId(Customer *c);
 
 private:
     bool open{};
     int next_customer_id{};
-    int customer_id_backup{};
     int allocateNewCustomerId();
-    void backupCustomerId();
-    void restoreCustomerIdFromBackup();
     void mainLoop();
     bool handleInput();
     std::vector<Trainer*> trainers;
