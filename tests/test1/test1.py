@@ -8,6 +8,10 @@ try:
     p.assert_command_returns("order 3", """nadav Is Doing Yoga
 nadav Is Doing Pilates
 niv Is Doing Rope Jumps""")
+    p.assert_command_returns("backup", "")
+    p.assert_command_returns("close 3", "Trainer 3 closed. Salary 270NIS")
+    p.assert_command_returns("restore", "")
+
 
 
 finally:
