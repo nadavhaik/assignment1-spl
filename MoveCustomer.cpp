@@ -37,5 +37,9 @@ std::string MoveCustomer::toString() const {
 }
 
 BaseAction *MoveCustomer::clone() {
-    return new MoveCustomer(this->srcTrainer, this->dstTrainer, this->id);
+    return new MoveCustomer(*this);
+}
+
+MoveCustomer::MoveCustomer(const MoveCustomer &other): BaseAction(other), srcTrainer(other.srcTrainer),
+        dstTrainer(other.dstTrainer), id(other.id) {
 }

@@ -18,7 +18,7 @@ using namespace std;
 
 Studio::Studio() {}
 
-Studio::Studio(const std::string &configFilePath) {
+Studio::Studio(const std::string &configFilePath): open(false), next_customer_id(0) {
     //                     Prefix:               Action:
     action_prefixes = {{"open",            OPEN_TRAINER},
                        {"order",           ORDER},
@@ -30,9 +30,6 @@ Studio::Studio(const std::string &configFilePath) {
                        {"log",             PRINT_ACTIONS_LOG},
                        {"backup",          BACKUP_STUDIO},
                        {"restore",         RESTORE_STUDIO}};
-    open = false;
-    next_customer_id = 0;
-    customer_id_backup = -1;
 
     int number_of_trainers = -1; // default value
     int next_workout_id = 0;
@@ -79,6 +76,7 @@ Studio::Studio(const std::string &configFilePath) {
             }
         }
     }
+    file.close();
 }
 
 int Studio::getNumOfTrainers() const {
@@ -133,7 +131,6 @@ bool Studio::handleInput() {
     vector<Customer *> customerList;
     switch(actionType) {
         case OPEN_TRAINER:
-            backupCustomerId(); // for case of failure - we'll want to roll back the ids allocation
             getline(ss, substr, ' ');
             trainer_id = stoi(substr);
             while (ss.good()) {
@@ -203,9 +200,6 @@ bool Studio::handleInput() {
     }
 
     action->act(*this);
-    if(action->getStatus() == ERROR && actionType == OPEN_TRAINER) {
-        restoreCustomerIdFromBackup(); // to make customer ids consistent even if fails - customers were deleted from memory
-    }
     actionsLog.insert(actionsLog.begin(), action);
     return actionType != CLOSE_ALL; // breaks mainLoop when actionType is closeall, which triggers destructors
 }
@@ -214,21 +208,85 @@ void Studio::mainLoop() {
     while(handleInput());
 }
 
-void Studio::backupCustomerId() {
-    customer_id_backup = next_customer_id;
-}
-
-void Studio::restoreCustomerIdFromBackup() {
-    int temp = customer_id_backup;
-    customer_id_backup = -1;
-    next_customer_id = temp;
-}
 
 Studio::~Studio() {
+    clear();
+}
+
+void Studio::clear() {
     for(BaseAction *action : actionsLog)
         delete action;
-    for(Trainer *t : trainers)
+    actionsLog.clear();
+    for(Trainer *t : trainers) {
         delete t;
+    }
+    trainers.clear();
+    workout_options.clear();
+    action_prefixes.clear();
 }
+
+bool Studio::hasBackup() {
+    return backup != nullptr;
+}
+
+
+// copy constructor
+Studio::Studio(const Studio &other): open(other.open), next_customer_id(other.next_customer_id),
+        workout_options(other.workout_options),
+        action_prefixes(other.action_prefixes) {
+
+    for(Trainer *t : other.trainers)
+        trainers.push_back(t->clone());
+    for(BaseAction *b: other.actionsLog)
+        actionsLog.push_back(b->clone());
+}
+
+// copy assignment operator
+Studio &Studio::operator=(const Studio &other) {
+   if(this == &other)
+       return *this;
+    clear();
+
+    open = other.open;
+    next_customer_id = other.next_customer_id;
+    action_prefixes = other.action_prefixes;
+    for(const Workout& w : other.workout_options) {
+        workout_options.push_back(w);
+    }
+    for(BaseAction *action : other.actionsLog) {
+        actionsLog.push_back(action->clone());
+    }
+    for(Trainer *t : other.trainers) {
+        trainers.push_back(t->clone());
+    }
+
+    return *this;
+}
+
+// move constructor
+Studio::Studio(Studio &&other): open(other.open), next_customer_id(other.next_customer_id),
+        workout_options(other.workout_options), action_prefixes(other.action_prefixes),
+        actionsLog(other.actionsLog), trainers(other.trainers) {}
+
+
+// move assignment
+Studio &Studio::operator=(Studio &&other) noexcept {
+    if(this == &other)
+        return *this;
+    clear();
+    open = other.open;
+    next_customer_id = other.next_customer_id;
+    actionsLog = other.actionsLog;
+    trainers = other.trainers;
+
+    return *this;
+}
+
+void Studio::deleteCustomerAndRollbackId(Customer *c) {
+    delete c;
+    next_customer_id--;
+}
+
+
 
 
