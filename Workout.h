@@ -15,6 +15,7 @@ public:
     std::string getName() const;
     int getPrice() const;
     WorkoutType getType() const;
+    Workout& operator=(const Workout &other);
     Workout& operator=(Workout&& other) noexcept;
 private:
     const int id;

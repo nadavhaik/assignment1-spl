@@ -237,6 +237,8 @@ void Studio::clear() {
         delete t;
     }
     trainers.clear();
+    workout_options.clear();
+    action_prefixes.clear();
 }
 
 bool Studio::hasBackup() {
@@ -244,30 +246,51 @@ bool Studio::hasBackup() {
 }
 
 
-// copy assignment
+// copy constructor
+Studio::Studio(const Studio &other): open(other.open), next_customer_id(other.next_customer_id),
+        customer_id_backup(other.customer_id_backup), workout_options(other.workout_options),
+        action_prefixes(other.action_prefixes) {
+
+    for(Trainer *t : other.trainers)
+        trainers.push_back(t->clone());
+    for(BaseAction *b: other.actionsLog)
+        actionsLog.push_back(b->clone());
+}
+
+// copy assignment operator
 Studio &Studio::operator=(const Studio &other) {
    if(this == &other)
        return *this;
-
     clear();
+
     open = other.open;
     next_customer_id = other.next_customer_id;
     customer_id_backup = other.customer_id_backup;
-
-    for(BaseAction *action : other.actionsLog)
-        actionsLog.push_back(action->clone());
-    for(Trainer *t : other.trainers)
-        trainers.push_back(t->clone());
-
+    action_prefixes = other.action_prefixes;
+    for(const Workout& w : other.workout_options) {
+        workout_options.push_back(w);
+    }
+    for(BaseAction *action : other.actionsLog) {
+        actionsLog.push_back(action);
+    }
+    for(Trainer *t : other.trainers) {
+        trainers.push_back(t);
+    }
 
     return *this;
 }
+
+// move constructor
+Studio::Studio(Studio &&other): open(other.open), next_customer_id(other.next_customer_id),
+        customer_id_backup(other.customer_id_backup), workout_options(other.workout_options),
+        action_prefixes(other.action_prefixes), actionsLog(other.actionsLog), trainers(other.trainers) {}
+
 
 // move assignment
 Studio &Studio::operator=(Studio &&other) noexcept {
     if(this == &other)
         return *this;
-
+    cout << "move assignment!" << endl;
     clear();
     open = other.open;
     next_customer_id = other.next_customer_id;
@@ -277,4 +300,7 @@ Studio &Studio::operator=(Studio &&other) noexcept {
 
     return *this;
 }
+
+
+
 

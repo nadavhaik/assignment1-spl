@@ -10,8 +10,9 @@ class Studio{
 public:
 	Studio();
     Studio(const std::string &configFilePath);
+    Studio(const Studio &other);
+    Studio(Studio &&other);
     ~Studio();
-//    Studio &operator=(Studio other);
     Studio &operator=(const Studio &other);
     Studio &operator=(Studio &&other) noexcept;
     void clear();

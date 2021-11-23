@@ -1,3 +1,6 @@
+
+#include "Workout.h"
+
 Workout::Workout(int w_id, std::string w_name, int w_price, WorkoutType w_type) :
         id(w_id), name(w_name), price(w_price), type(w_type) {}
 
@@ -20,4 +23,8 @@ Workout &Workout::operator=(Workout &&other) noexcept {
 
 Workout::Workout(Workout const &other)
         : id(other.id), name(other.name), price(other.price), type(other.type) {
+}
+
+Workout &Workout::operator=(const Workout &other) {
+
 }

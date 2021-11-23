@@ -13,7 +13,6 @@ void RestoreStudio::act(Studio &studio) {
         return;
     }
     studio = *backup;
-    delete backup;
     backup = nullptr;
     complete();
 }
