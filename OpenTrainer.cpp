@@ -10,7 +10,6 @@ OpenTrainer::OpenTrainer(int id, vector<Customer *> &customersList):
 }
 
 void OpenTrainer::act(Studio &studio) {
-
     // building the string - because the customers might be deleted from the heap later
     original_input_command = "open " + to_string(trainerId);
     for (Customer *c: customers)
@@ -18,8 +17,9 @@ void OpenTrainer::act(Studio &studio) {
 
     Trainer *t = studio.getTrainer(trainerId);
     if (t == nullptr || t->isOpen()) {
-        for (Customer *c : customers) // Avoiding memory leaks
-            delete c;
+        for(Customer *c : customers) // Avoiding memory leaks
+            studio.deleteCustomerAndRollbackId(c);
+        customers.clear();
         error("Workout session does not exist or is already open.");
         return;
     }
@@ -28,10 +28,11 @@ void OpenTrainer::act(Studio &studio) {
         if(counter < t->getCapacity())
             t->addCustomer(c);
         else // avoiding leaks
-            delete c;
+            studio.deleteCustomerAndRollbackId(c);
         counter++;
     }
 
+    customers.clear();
     t->openTrainer();
     complete();
 }
@@ -47,8 +48,6 @@ BaseAction *OpenTrainer::clone() {
     return new OpenTrainer(*this);
 }
 
-OpenTrainer::OpenTrainer(OpenTrainer const &other): trainerId(other.trainerId), original_input_command(other.original_input_command) {
-    for(Customer *c : other.customers) {
-        customers.push_back(c->clone());
-    }
+OpenTrainer::OpenTrainer(OpenTrainer const &other): BaseAction(other), trainerId(other.trainerId), original_input_command(other.original_input_command) {
+
 }
