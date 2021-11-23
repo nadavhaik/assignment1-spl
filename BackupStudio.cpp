@@ -18,5 +18,9 @@ std::string BackupStudio::toString() const {
 }
 
 BaseAction *BackupStudio::clone() {
-    return new BackupStudio();
+    return new BackupStudio(*this);
+}
+
+BackupStudio::BackupStudio(const BackupStudio &other): BaseAction(other) {
+
 }

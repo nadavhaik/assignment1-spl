@@ -32,6 +32,7 @@ void OpenTrainer::act(Studio &studio) {
         counter++;
     }
 
+    customers.clear();
     t->openTrainer();
     complete();
 }
@@ -47,8 +48,6 @@ BaseAction *OpenTrainer::clone() {
     return new OpenTrainer(*this);
 }
 
-OpenTrainer::OpenTrainer(OpenTrainer const &other): trainerId(other.trainerId), original_input_command(other.original_input_command) {
-    for(Customer *c : other.customers) {
-        customers.push_back(c->clone());
-    }
+OpenTrainer::OpenTrainer(OpenTrainer const &other): BaseAction(other), trainerId(other.trainerId), original_input_command(other.original_input_command) {
+
 }

@@ -26,5 +26,9 @@ std::string Close::toString() const {
 }
 
 BaseAction *Close::clone() {
-    return new Close(this->trainerId);
+    return new Close(*this);
+}
+
+Close::Close(const Close &other): BaseAction(other), trainerId(other.trainerId) {
+
 }

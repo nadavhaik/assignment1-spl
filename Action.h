@@ -149,7 +149,7 @@ private:
 class RestoreStudio : public BaseAction {
 public:
     RestoreStudio();
-    RestoreStudio(ActionStatus status);
+    RestoreStudio(RestoreStudio const &other);
     void act(Studio &studio);
     std::string toString() const;
     BaseAction *clone() override;
