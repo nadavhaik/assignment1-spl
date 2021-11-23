@@ -203,18 +203,12 @@ bool Studio::handleInput() {
             break;
     }
 
-
     action->act(*this);
     if(action->getStatus() == ERROR && actionType == OPEN_TRAINER) {
         restoreCustomerIdFromBackup(); // to make customer ids consistent even if fails]
     }
-    if(actionType == CLOSE_ALL) {
-        // deletes the last pointer and breaks mainLoop
-        delete action;
-        return false;
-    }
     actionsLog.insert(actionsLog.begin(), action);
-    return true;
+    return actionType != CLOSE_ALL; // breaks mainLoop when actionType is closeall, which triggers destructors
 }
 
 void Studio::mainLoop() {
