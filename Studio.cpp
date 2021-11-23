@@ -79,6 +79,7 @@ Studio::Studio(const std::string &configFilePath) {
             }
         }
     }
+    file.close();
 }
 
 int Studio::getNumOfTrainers() const {
@@ -227,8 +228,14 @@ void Studio::restoreCustomerIdFromBackup() {
 Studio::~Studio() {
     for(BaseAction *action : actionsLog)
         delete action;
-    for(Trainer *t : trainers)
+    for(Trainer *t : trainers) {
+        if (t->isOpen()) { // edge case - may only happen in backup destruction (closeall wasn't called on backup)
+                            // in the main object, the destructor is called after closeall - no trainers will be opened.
+            for(Customer *c: t->getCustomers())
+                delete c;
+        }
         delete t;
+    }
 }
 
 
