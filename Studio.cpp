@@ -230,7 +230,6 @@ Studio::~Studio() {
         delete action;
     for(Trainer *t : trainers)
         delete t;
-
 }
 
 
