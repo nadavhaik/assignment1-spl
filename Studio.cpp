@@ -204,7 +204,7 @@ bool Studio::handleInput() {
 
     action->act(*this);
     if(action->getStatus() == ERROR && actionType == OPEN_TRAINER) {
-        restoreCustomerIdFromBackup(); // to make customer ids consistent even if fails]
+        restoreCustomerIdFromBackup(); // to make customer ids consistent even if fails - customers were deleted from memory
     }
     actionsLog.insert(actionsLog.begin(), action);
     return actionType != CLOSE_ALL; // breaks mainLoop when actionType is closeall, which triggers destructors
