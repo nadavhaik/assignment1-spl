@@ -273,7 +273,6 @@ Studio::Studio(Studio &&other): open(other.open), next_customer_id(other.next_cu
 Studio &Studio::operator=(Studio &&other) noexcept {
     if(this == &other)
         return *this;
-    cout << "move assignment!" << endl;
     clear();
     open = other.open;
     next_customer_id = other.next_customer_id;
