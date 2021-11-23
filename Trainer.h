@@ -26,6 +26,7 @@ public:
     Trainer* clone();
     void clear();
     Trainer(Trainer const &other);
+    void clearAllOrders();
 
 private:
     int capacity;

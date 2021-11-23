@@ -17,6 +17,7 @@ void Order::act(Studio &studio) {
     }
     vector<Customer*> customers = t->getCustomers();
     const vector<Workout> &workoutOptions = studio.getWorkoutOptions();
+    t->clearAllOrders();
 
     // ordering each customer
     for(Customer *c : customers) {

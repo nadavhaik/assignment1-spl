@@ -110,6 +110,10 @@ void Trainer::clear() {
     orderList.clear();
 }
 
+void Trainer::clearAllOrders() {
+    orderList.clear();
+}
+
 
 
 
