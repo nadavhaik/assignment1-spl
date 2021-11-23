@@ -74,6 +74,7 @@ void Trainer::openTrainer() {
 void Trainer::closeTrainer() {
     for(Customer *c : customersList)
         delete c;
+    customersList.clear();
     open = false;
 }
 
