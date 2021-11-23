@@ -16,8 +16,12 @@ void MoveCustomer::act(Studio &studio) {
         return;
     }
 
-    source->removeCustomer(id);
+    source->removeCustomer(id); // updates old salary
     dest->addCustomer(c);
+
+    // triggering order to update the salary for specific customer only
+    vector<int> workout_ids = c->order(studio.getWorkoutOptions());
+    dest->order(c->getId(), workout_ids, studio.getWorkoutOptions());
 
     if(source->getCustomers().empty()) { // also triggering Close
         Close close_action = Close(srcTrainer);
