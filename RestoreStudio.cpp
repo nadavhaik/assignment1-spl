@@ -14,6 +14,7 @@ void RestoreStudio::act(Studio &studio) {
     }
 
 
+    backup = nullptr;
     complete();
 }
 

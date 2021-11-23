@@ -38,7 +38,7 @@ std::string Order::toString() const {
     string s = "order " + to_string(trainerId);
     if(getStatus() == COMPLETED)
         return s + " Completed";
-    return s + "Error: Trainer does not exist or is not open";
+    return s + " Error: Trainer does not exist or is not open";
 }
 
 BaseAction *Order::clone() {
