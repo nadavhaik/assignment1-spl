@@ -232,3 +232,22 @@ Studio::~Studio() {
 }
 
 
+Studio::Studio(const Studio &other): open(other.open), next_customer_id(other.next_customer_id),
+                                        customer_id_backup(other.customer_id_backup) {
+    for(Trainer *t : other.trainers){
+        trainers.push_back(t->clone());
+    }
+    for (Workout w : other.workout_options){
+        workout_options.push_back(w);
+    }
+    for(BaseAction *b: other.actionsLog){
+        actionsLog.push_back((b->clone()));
+    }
+}
+
+
+
+
+
+
+

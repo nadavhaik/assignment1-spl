@@ -10,6 +10,7 @@ class Studio{
 public:
 	Studio();
     Studio(const std::string &configFilePath);
+    Studio(const Studio &other);
     ~Studio();
     void start();
     int getNumOfTrainers() const;
