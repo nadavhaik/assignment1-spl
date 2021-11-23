@@ -36,14 +36,12 @@ int Trainer::getCapacity() const {
     return capacity;
 }
 
-//should we throw an invalid argument error ? - not mentioned
 Customer *Trainer::getCustomer(int id) {
     if(customer_by_id_index.find(id) == customer_by_id_index.end()) // id doesn't exist
         return nullptr;
-    return customer_by_id_index.at(id);
+    return customer_by_id_index[id];
 }
 
-//shouldn't we check if the workout was completed ? - not mentioned
 int Trainer::getSalary() {
     int salary = 0;
     for (OrderPair p : orderList){
