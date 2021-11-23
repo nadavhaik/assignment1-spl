@@ -47,7 +47,7 @@ private:
     OpenTrainer(OpenTrainer const &other);
 	const int trainerId;
 	std::vector<Customer *> customers;
-    std::string s;
+    std::string original_input_command;
 };
 
 

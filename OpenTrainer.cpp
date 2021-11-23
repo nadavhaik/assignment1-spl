@@ -12,9 +12,9 @@ OpenTrainer::OpenTrainer(int id, vector<Customer *> &customersList):
 void OpenTrainer::act(Studio &studio) {
 
     // building the string - because the customers might be deleted from the heap later
-    s = "open " + to_string(trainerId);
+    original_input_command = "open " + to_string(trainerId);
     for (Customer *c: customers)
-        s += " " + c->toString();
+        original_input_command += " " + c->toString();
 
     Trainer *t = studio.getTrainer(trainerId);
     if (t == nullptr || t->isOpen()) {
@@ -38,8 +38,8 @@ void OpenTrainer::act(Studio &studio) {
 
 string OpenTrainer::toString() const {
     if(getStatus() == COMPLETED)
-        return s + " Completed";
-    return s + " Error: Workout session does not exist or is already open.";
+        return original_input_command + " Completed";
+    return original_input_command + " Error: Workout session does not exist or is already open.";
 
 }
 
@@ -47,7 +47,7 @@ BaseAction *OpenTrainer::clone() {
     return new OpenTrainer(*this);
 }
 
-OpenTrainer::OpenTrainer(OpenTrainer const &other): trainerId(other.trainerId), s(other.s) {
+OpenTrainer::OpenTrainer(OpenTrainer const &other): trainerId(other.trainerId), original_input_command(other.original_input_command) {
     for(Customer *c : other.customers) {
         customers.push_back(c->clone());
     }
