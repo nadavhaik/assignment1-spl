@@ -8,16 +8,15 @@ RestoreStudio::RestoreStudio() {
 }
 
 void RestoreStudio::act(Studio &studio) {
-    if(backup == nullptr) {
+    if (!Studio::hasBackup()) {
         error("No backup available");
         return;
     }
-
-
+    studio = *backup;
+    delete backup;
     backup = nullptr;
     complete();
 }
-
 std::string RestoreStudio::toString() const {
     if(getStatus() == COMPLETED)
         return "restore Completed";
