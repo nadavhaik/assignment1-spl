@@ -1,16 +1,14 @@
 #include "Action.h"
 
 using namespace std;
-extern Studio *backup;
 
 BackupStudio::BackupStudio(): BaseAction() {
 
 }
 
 void BackupStudio::act(Studio &studio) {
-    delete backup;
-    backup = new Studio(studio);
-    complete();
+    for(BaseAction *a: studio.getActionsLog())
+        a->clone();
 }
 
 std::string BackupStudio::toString() const {
@@ -18,9 +16,5 @@ std::string BackupStudio::toString() const {
 }
 
 BaseAction *BackupStudio::clone() {
-    return new BackupStudio(*this);
-}
-
-BackupStudio::BackupStudio(const BackupStudio &other): BaseAction(other) {
-
+    return new BackupStudio();
 }

@@ -22,9 +22,5 @@ std::string PrintWorkoutOptions::toString() const {
 }
 
 BaseAction *PrintWorkoutOptions::clone() {
-    return new PrintWorkoutOptions(*this);
-}
-
-PrintWorkoutOptions::PrintWorkoutOptions(const PrintWorkoutOptions &other): BaseAction(other) {
-
+    return new PrintWorkoutOptions();
 }

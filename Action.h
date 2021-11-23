@@ -22,7 +22,6 @@ class Studio;
 class BaseAction{
 public:
     BaseAction();
-    BaseAction(const BaseAction &other);
     virtual ~BaseAction();
     ActionStatus getStatus() const;
     virtual void act(Studio& studio)=0;
@@ -41,11 +40,11 @@ private:
 class OpenTrainer : public BaseAction {
 public:
     OpenTrainer(int id, std::vector<Customer *> &customersList);
-    OpenTrainer(OpenTrainer const &other);
     void act(Studio &studio);
     std::string toString() const;
     BaseAction *clone() override;
 private:
+    OpenTrainer(OpenTrainer const &other);
 	const int trainerId;
 	std::vector<Customer *> customers;
     std::string original_input_command;
@@ -55,7 +54,6 @@ private:
 class Order : public BaseAction {
 public:
     Order(int id);
-    Order(Order const &other);
     void act(Studio &studio);
     std::string toString() const;
     BaseAction *clone() override;
@@ -67,7 +65,6 @@ private:
 class MoveCustomer : public BaseAction {
 public:
     MoveCustomer(int src, int dst, int customerId);
-    MoveCustomer(MoveCustomer const &other);
     void act(Studio &studio);
     std::string toString() const;
     BaseAction *clone() override;
@@ -81,7 +78,6 @@ private:
 class Close : public BaseAction {
 public:
     Close(int id);
-    Close(Close const &other);
     void act(Studio &studio);
     std::string toString() const;
     BaseAction *clone() override;
@@ -93,7 +89,6 @@ private:
 class CloseAll : public BaseAction {
 public:
     CloseAll();
-    CloseAll(CloseAll const &other);
     void act(Studio &studio);
     std::string toString() const;
     BaseAction *clone() override;
@@ -104,7 +99,6 @@ private:
 class PrintWorkoutOptions : public BaseAction {
 public:
     PrintWorkoutOptions();
-    PrintWorkoutOptions(PrintWorkoutOptions const &other);
     void act(Studio &studio);
     std::string toString() const;
     BaseAction *clone() override;
@@ -115,7 +109,6 @@ private:
 class PrintTrainerStatus : public BaseAction {
 public:
     PrintTrainerStatus(int id);
-    PrintTrainerStatus(PrintTrainerStatus const &other);
     void act(Studio &studio);
     std::string toString() const;
     BaseAction *clone() override;
@@ -127,7 +120,6 @@ private:
 class PrintActionsLog : public BaseAction {
 public:
     PrintActionsLog();
-    PrintActionsLog(PrintActionsLog const &other);
     void act(Studio &studio);
     std::string toString() const;
     BaseAction *clone() override;
@@ -138,7 +130,6 @@ private:
 class BackupStudio : public BaseAction {
 public:
     BackupStudio();
-    BackupStudio(BackupStudio const &other);
     void act(Studio &studio);
     std::string toString() const;
     BaseAction *clone() override;
@@ -149,7 +140,6 @@ private:
 class RestoreStudio : public BaseAction {
 public:
     RestoreStudio();
-    RestoreStudio(RestoreStudio const &other);
     void act(Studio &studio);
     std::string toString() const;
     BaseAction *clone() override;

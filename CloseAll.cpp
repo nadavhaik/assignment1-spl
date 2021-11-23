@@ -24,9 +24,5 @@ std::string CloseAll::toString() const {
 }
 
 BaseAction *CloseAll::clone() {
-    return new CloseAll(*this);
-}
-
-CloseAll::CloseAll(const CloseAll &other): BaseAction(other) {
-
+    return new CloseAll();
 }

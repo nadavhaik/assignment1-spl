@@ -32,9 +32,5 @@ std::string PrintTrainerStatus::toString() const {
 }
 
 BaseAction *PrintTrainerStatus::clone() {
-    return new PrintTrainerStatus(*this);
-}
-
-PrintTrainerStatus::PrintTrainerStatus(const PrintTrainerStatus &other): BaseAction(other), trainerId(other.trainerId) {
-
+    return new PrintTrainerStatus(trainerId);
 }

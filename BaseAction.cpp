@@ -1,7 +1,5 @@
 #include <string>
 #include <iostream>
-#include "Action.h"
-
 
 using namespace std;
 
@@ -25,7 +23,5 @@ void BaseAction::error(std::string errorMsg){
 string BaseAction::getErrorMsg() const {
     return errorMsg;
 }
-
-BaseAction::BaseAction(const BaseAction &other) : status(other.status) {}
 
 BaseAction::~BaseAction() = default;

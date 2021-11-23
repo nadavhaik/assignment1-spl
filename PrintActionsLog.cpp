@@ -17,9 +17,5 @@ std::string PrintActionsLog::toString() const {
 }
 
 BaseAction *PrintActionsLog::clone() {
-    return new PrintActionsLog(*this);
-}
-
-PrintActionsLog::PrintActionsLog(const PrintActionsLog &other): BaseAction(other) {
-
+    return new PrintActionsLog();
 }

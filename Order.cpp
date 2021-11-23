@@ -42,7 +42,5 @@ std::string Order::toString() const {
 }
 
 BaseAction *Order::clone() {
-    return new Order(*this);
+    return new Order(this->trainerId);
 }
-
-Order::Order(const Order &other): BaseAction(other), trainerId(other.trainerId) {}

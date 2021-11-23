@@ -24,9 +24,5 @@ std::string RestoreStudio::toString() const {
 }
 
 BaseAction *RestoreStudio::clone() {
-    return new RestoreStudio(*this);
-}
-
-RestoreStudio::RestoreStudio(const RestoreStudio &other) {
-
+    return new RestoreStudio();
 }
