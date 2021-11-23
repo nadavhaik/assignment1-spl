@@ -7,9 +7,8 @@ BackupStudio::BackupStudio(): BaseAction() {
 }
 
 void BackupStudio::act(Studio &studio) {
-
-
-    complete();
+    for(BaseAction *a: studio.getActionsLog())
+        a->clone();
 }
 
 std::string BackupStudio::toString() const {
