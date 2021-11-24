@@ -198,9 +198,9 @@ bool Studio::handleInput() {
             action = new RestoreStudio();
             break;
     }
-
-    action->act(*this);
     actionsLog.insert(actionsLog.begin(), action);
+    action->act(*this);
+
     return actionType != CLOSE_ALL; // breaks mainLoop when actionType is closeall, which triggers destructors
 }
 
@@ -285,6 +285,10 @@ Studio &Studio::operator=(Studio &&other) noexcept {
 void Studio::deleteCustomerAndRollbackId(Customer *c) {
     delete c;
     next_customer_id--;
+}
+
+void Studio::addToLog(BaseAction *action) {
+    actionsLog.push_back(action);
 }
 
 

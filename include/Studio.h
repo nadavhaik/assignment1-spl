@@ -23,6 +23,7 @@ public:
     static bool hasBackup();
     std::vector<Workout>& getWorkoutOptions();
     void deleteCustomerAndRollbackId(Customer *c);
+    void addToLog(BaseAction *action);
 
 private:
     bool open{};

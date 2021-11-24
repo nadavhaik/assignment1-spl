@@ -1,4 +1,3 @@
-#include "../include/Action.h"
 #include "../include/Studio.h"
 using namespace std;
 
@@ -24,8 +23,9 @@ void MoveCustomer::act(Studio &studio) {
     dest->order(c->getId(), workout_ids, studio.getWorkoutOptions());
 
     if(source->getCustomers().empty()) { // also triggering Close
-        Close close_action = Close(srcTrainer);
-        close_action.act(studio);
+        Close *close_action = new Close(srcTrainer);
+        close_action->act(studio);
+        studio.addToLog(close_action);
     }
 
     complete();
