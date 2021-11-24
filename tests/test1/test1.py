@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../')
 from tests_functions import *
 conf_file = "./test1.file.txt"
 p = RunningProgram("test 1", conf_file)
