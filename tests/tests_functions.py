@@ -68,5 +68,5 @@ class RunningProgram:
 
 
         os.remove(VALGRIND_LOG_FILE)
-        print("Test passed!\n")
+        print("Test ended!\n")
 
