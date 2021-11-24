@@ -1,11 +1,10 @@
 import subprocess
 import os
 from time import sleep
-MAIN_FILE_LOCATION = "../src/main.cpp"
 VALGRIND_LOG_FILE = './valgrind_log.txt'
 END_COMMAND = "closeall"
-MAIN_CPP_FILE = "../../main.cpp"
-CPP_OUTPUT = "../../main"
+MAIN_CPP_FILE = "../../src/main.cpp"
+CPP_OUTPUT = "./main"
 read, write = os.pipe()
 
 def assert_equal(obj1, obj2):
