@@ -1,5 +1,5 @@
-#include "Action.h"
-#include "Studio.h"
+#include "../include/Action.h"
+#include "../include/Studio.h"
 using namespace std;
 
 MoveCustomer::MoveCustomer(int src, int dst, int customerId): BaseAction(), srcTrainer(src), dstTrainer(dst), id(customerId) {

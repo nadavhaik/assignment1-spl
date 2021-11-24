@@ -1,6 +1,6 @@
-#include "Trainer.h"
-#include "Studio.h"
-#include "Action.h"
+#include "../include/Trainer.h"
+#include "../include/Studio.h"
+#include "../include/Action.h"
 
 #include <string>
 using namespace std;

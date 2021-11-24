@@ -11,7 +11,7 @@
 #include "OpenTrainer.cpp"
 #include "Order.cpp"
 #include "BaseAction.cpp"
-#include "Studio.h"
+#include "../include/Studio.h"
 
 
 using namespace std;

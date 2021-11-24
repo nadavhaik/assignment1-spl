@@ -1,6 +1,6 @@
 #include <string>
 #include <iostream>
-#include "Trainer.h"
+#include "../include/Trainer.h"
 
 Trainer::Trainer(int t_capacity): capacity(t_capacity) {}
 

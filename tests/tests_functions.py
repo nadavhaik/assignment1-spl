@@ -1,7 +1,7 @@
 import subprocess
 import os
 from time import sleep
-MAIN_FILE_LOCATION = "../main.cpp"
+MAIN_FILE_LOCATION = "../src/main.cpp"
 VALGRIND_LOG_FILE = './valgrind_log.txt'
 END_COMMAND = "closeall"
 MAIN_CPP_FILE = "../../main.cpp"
