@@ -13,8 +13,6 @@ void RestoreStudio::act(Studio &studio) {
         return;
     }
     studio = *backup;
-    delete backup;
-    backup = nullptr;
     complete();
 }
 std::string RestoreStudio::toString() const {
