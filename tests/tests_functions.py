@@ -3,9 +3,7 @@ import os
 from time import sleep
 VALGRIND_LOG_FILE = './valgrind_log.txt'
 END_COMMAND = "closeall"
-MAIN_CPP_FILE = "../../src/main.cpp"
-CPP_OUTPUT = "./main"
-read, write = os.pipe()
+CPP_OUTPUT = "../../bin/studio"
 
 def assert_equal(obj1, obj2):
     assert obj1 == obj2, f"expected: {obj2}, got: {obj1}"
@@ -16,8 +14,7 @@ def read_line_from_log(line_prefix: str, log: str):
     return log[first_index:last_index]
 
 def start_test(test_name: str, conf_file: str):
-    compile_command = ["g++", MAIN_CPP_FILE, "-o", CPP_OUTPUT]
-    subprocess.run(compile_command, stdout=subprocess.PIPE).stdout.decode('utf8').split('\n')
+    subprocess.run(["make"], stdout=subprocess.PIPE, cwd="../..").stdout.decode('utf8').split('\n')
     print(f"Running: {test_name}")
     start_command = ["valgrind", "--leak-check=full", "--show-reachable=yes", f"--log-file={VALGRIND_LOG_FILE}",
                      CPP_OUTPUT, conf_file]
